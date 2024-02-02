@@ -9,8 +9,21 @@ namespace ClassLibrary.HarborFramwork.ShipInfo
     public class Ship
     {
         private int Id { get; set; }
-        private ShipType shipType { get; set; }
+        private ShipType ShipType { get; set; }
+        private ShipHistory History { get; set; }
+        private ShipCertificate Certificate { get; set; }
 
-        //public string getHistory() { }
+        public Ship(int id, ShipType shipType)
+        {
+            Id = id;
+            ShipType = shipType;
+            History = new ShipHistory();
+            Certificate = new ShipCertificate();
+        }
+
+        public ShipHistory GetHistory()
+        {
+            return History;
+        }
     }
 }

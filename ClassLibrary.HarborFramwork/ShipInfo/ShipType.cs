@@ -20,29 +20,29 @@ namespace ClassLibrary.HarborFramwork.ShipInfo
             switch (shipType)
             {
                 case ShipType.CARGO_SHIP:
-                    return "shipSpeed" = 20;
+                    return 20;
                 case ShipType.CRUISE_SHIP:
-                    return "shipSpeed" = 30;
+                    return 30;
                 case ShipType.LEISURE_BOAT:
-                    return "shipSpeed" = 50;
+                    return 50;
                 default:
-                    return null;
+                    throw new ArgumentException("Invalid ship type");
             }
         }
-    }
 
-    public static int travelTime(ShipType shipType, int distance)
-    {
-        int speed = ShipSpeeds.GetSpeed(shipType);
+        public static int TravelTime(ShipType shipType, int distance)
+        {
+            int speed = GetSpeed(shipType);
 
-        if (speed > 0)
-        {
-            int time = distance / speed;
-            return time;
-        }
-        else
-        {
-            return "Speed error!"
+            if (speed > 0)
+            {
+                int time = distance / speed;
+                return time;
+            }
+            else
+            {
+                throw new InvalidOperationException("Speed error!");
+            }
         }
     }
 }

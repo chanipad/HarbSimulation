@@ -8,8 +8,12 @@ namespace ClassLibrary.HarborFramwork.ShipInfo
 {
     public class ShipCertificate
     {
-        private int certificateID { get; set; }
-        private DateTime expiratioinDate { get; set; }
-        //public static void validateCertificate() { }
+        private int CertificateID { get; set; }
+        private DateTime ExpirationDate { get; set; }
+
+        public static void ValidateCertificate()
+        {
+            // Implementasjoner for sertifikatvalidering
+        }
     }
 }
