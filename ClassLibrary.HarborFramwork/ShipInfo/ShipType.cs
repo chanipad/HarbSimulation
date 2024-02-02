@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary.HarborFramwork.ShipInfo
 {
-    internal enum ShipType
+    public enum ShipType
     {
         CARGO_SHIP,
         CRUISE_SHIP,
         LEISURE_BOAT
     }
+
+
 }

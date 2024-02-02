@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary.HarborFramwork.ShipInfo
 {
-    internal class ShipCertificate
+    public class ShipCertificate
     {
         private int certificateID { get; set; }
         private DateTime expiratioinDate { get; set; }

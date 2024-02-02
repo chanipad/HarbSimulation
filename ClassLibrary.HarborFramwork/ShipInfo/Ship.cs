@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary.HarborFramwork.ShipInfo
 {
-    internal class Ship
+    public class Ship
     {
         private int Id { get; set; }
         private ShipType shipType { get; set; }
