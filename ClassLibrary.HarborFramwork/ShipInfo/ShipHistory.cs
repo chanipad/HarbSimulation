@@ -1,12 +1,12 @@
-﻿using ClassLibrary.HarborFramwork.DockingInfo;
+﻿using ClassLibrary.HarborFramework.DockingInfo;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ClassLibrary.HarborFramwork.ShipInfo
+namespace ClassLibrary.HarborFramework.ShipInfo
 {
+    /// <summary>
+    /// Represents the history of a ship, including dockings and loadings.
+    /// </summary>
     public class ShipHistory
     {
         private List<Docking> Dockings { get; set; }

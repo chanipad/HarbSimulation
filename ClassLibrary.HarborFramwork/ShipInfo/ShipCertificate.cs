@@ -1,19 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClassLibrary.HarborFramwork.ShipInfo
+﻿namespace ClassLibrary.HarborFramework.ShipInfo
 {
+    /// <summary>
+    /// Represents the certificate information of a ship.
+    /// </summary>
     public class ShipCertificate
     {
-        private int CertificateID { get; set; }
-        private DateTime ExpirationDate { get; set; }
+        /// <summary>
+        /// Gets or sets the unique identifier of the certificate.
+        /// </summary>
+        public int CertificateID { get; set; }
 
-        public static void ValidateCertificate()
+        /// <summary>
+        /// Gets or sets the expiration date of the certificate.
+        /// </summary>
+        public DateTime ExpirationDate { get; set; }
+
+        /// <summary>
+        /// Validates the ship certificate.
+        /// </summary>
+        public static bool ValidateCertificate(ShipCertificate certificate)
         {
-            // Implementasjoner for sertifikatvalidering
+            // This check if the certificate is expired
+            return certificate.ExpirationDate > DateTime.Now;
         }
     }
 }

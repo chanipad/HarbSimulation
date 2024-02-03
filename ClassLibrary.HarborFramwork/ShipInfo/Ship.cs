@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ClassLibrary.HarborFramework.DockingInfo;
+using System;
 
-namespace ClassLibrary.HarborFramwork.ShipInfo
+namespace ClassLibrary.HarborFramework.ShipInfo
 {
+    /// <summary>
+    /// Represents a ship in the harbor.
+    /// </summary>
     public class Ship
     {
         private int Id { get; set; }

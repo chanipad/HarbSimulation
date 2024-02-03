@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClassLibrary.HarborFramwork.ShipInfo
+﻿namespace ClassLibrary.HarborFramework.ShipInfo
 {
+    /// <summary>
+    /// Represents the type of a ship.
+    /// </summary>
     public enum ShipType
     {
         CARGO_SHIP,
@@ -13,6 +10,9 @@ namespace ClassLibrary.HarborFramwork.ShipInfo
         LEISURE_BOAT
     }
 
+    /// <summary>
+    /// Provides utility methods related to ship speeds.
+    /// </summary>
     public class ShipSpeeds
     {
         public static int GetSpeed(ShipType shipType)
