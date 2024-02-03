@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary.HarborFramwork.ContainerYardInfo
 {
-    internal enum ContainerYardType
+    public enum ContainerYardType
     {
         STANDARD,
         SPECIALIZED

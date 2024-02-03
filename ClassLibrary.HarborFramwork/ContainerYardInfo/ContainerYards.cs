@@ -6,11 +6,19 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary.HarborFramwork.ContainerYardInfo
 {
-    internal class ContainerYards
+    public class ContainerYards
     {
-        private int containerYardZone { get; set; }
-        private List<Container> containersList { get; set; }
+        public int ContainerYardZone { get; set; }
+        public List<Container> ContainersList { get; set; }
 
-        //public static void configureContainer() { }
+        public ContainerYards()
+        {
+            ContainersList = new List<Container>();
+        }
+
+        public void ConfigureContainer(Container container)
+        {
+            ContainersList.Add(container);
+        }
     }
 }
