@@ -7,7 +7,7 @@ using ClassLibrary.HarborFramwork.ShipInfo;
 
 namespace ClassLibrary.HarborFramwork.DockingInfo
 {
-    internal class DockSpace
+    public class DockSpace
     {
         private int dockSpaceNumber { get; set; }
         private DockSpaceType type { get; set; }

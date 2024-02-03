@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary.HarborFramwork.Utilities
 {
-    internal class TimeSlot
+    public class TimeSlot
     {
         private DateTime startTime { get; set; }
         private DateTime endTime { get; set; }
