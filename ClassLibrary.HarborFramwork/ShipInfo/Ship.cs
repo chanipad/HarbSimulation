@@ -1,7 +1,4 @@
-﻿using ClassLibrary.HarborFramework.DockingInfo;
-using System;
-
-namespace ClassLibrary.HarborFramework.ShipInfo
+﻿namespace ClassLibrary.HarborFramework.ShipInfo
 {
     /// <summary>
     /// Represents a ship in the harbor.
