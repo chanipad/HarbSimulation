@@ -9,7 +9,12 @@ namespace ClassLibrary.HarborFramwork.DockingInfo
 {
     public class Location
     {
-        public required TimeSlot timestamp { get; set; }
+        public required DateTime timestamp { get; set; }
         public int location { get; set; }
+
+        public static implicit operator int(Location v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
