@@ -7,9 +7,9 @@ using ClassLibrary.HarborFramwork.DockingInfo;
 
 namespace ClassLibrary.HarborFramwork.ContainerYardInfo
 {
-    internal class Container
+    public class Container
     {
-        private int containerId { get; set; }
-        private Location location { get; set; }
+        public int containerId { get; set; }
+        public Location location { get; set; }
     }
 }

@@ -7,9 +7,12 @@ using ClassLibrary.HarborFramwork.DockingInfo;
 
 namespace ClassLibrary.HarborFramwork.ContainerYardInfo
 {
-    internal class ContainerHistory
+    public class ContainerHistory
     {
-        private List<Location> locations { get; set; }
-        public int getContainerHistory(int containerId) { return locations.Count; }
+        public List<Location> location { get; set; }
+        public int getContainerHistory(int containerId)
+        { 
+            return location.Count;
+        }
     }
 }
