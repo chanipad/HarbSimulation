@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ClassLibrary.HarborFramwork.ShipInfo;
+﻿using ClassLibrary.HarborFramework.ShipInfo;
 
 namespace ClassLibrary.HarborFramwork.DockingInfo
 {
-    internal class DockSpace
+    public class DockSpace
     {
         private int dockSpaceNumber { get; set; }
         private DockSpaceType type { get; set; }

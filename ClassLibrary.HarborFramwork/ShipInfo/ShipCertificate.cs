@@ -1,15 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClassLibrary.HarborFramwork.ShipInfo
+﻿namespace ClassLibrary.HarborFramework.ShipInfo
 {
-    internal class ShipCertificate
+    /// <summary>
+    /// Represents the certificate information of a ship.
+    /// </summary>
+    public class ShipCertificate
     {
-        private int certificateID { get; set; }
-        private DateTime expiratioinDate { get; set; }
-        //public static void validateCertificate() { }
+        /// <summary>
+        /// Gets or sets the unique identifier of the certificate.
+        /// </summary>
+        public int CertificateID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the expiration date of the certificate.
+        /// </summary>
+        public DateTime ExpirationDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets a flag indicating whether the ship has access control clearance.
+        /// </summary>
+        public bool HasAccessControlClearance { get; set; }
+
+        /// <summary>
+        /// Gets or sets a flag indicating whether the inspection of cargo and ship supplies has been performed.
+        /// </summary>
+        public bool IsInspectionPerformed { get; set; }
+
+        /// <summary>
+        /// Validates the ship certificate.
+        /// </summary>
+        public static bool ValidateCertificate(ShipCertificate certificate)
+        {
+            // This check if the certificate is expired
+            if (certificate.ExpirationDate <= DateTime.Now)
+            {
+                return false;
+            }
+
+            return certificate.HasAccessControlClearance && certificate.IsInspectionPerformed;
+        }
     }
 }
