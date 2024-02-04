@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary.HarborFramwork.DockingInfo
 {
-    internal class WaitingStation
+    public class WaitingStation
     {
         public int locationNumber { get; set; }
 

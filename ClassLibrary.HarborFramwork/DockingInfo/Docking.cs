@@ -7,7 +7,7 @@ using ClassLibrary.HarborFramwork.Utilities;
 
 namespace ClassLibrary.HarborFramwork.DockingInfo
 {
-    internal class Docking
+    public class Docking
     {
         private DockSpace dockSpacen { get; set; }
         private TimeSlot timestamp { get; set; }
