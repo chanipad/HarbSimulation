@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary.HarborFramwork.MarineData
 {
-    internal class TideInformation
+    public class TideInformation
     {
         private Dictionary<DateTime, double> tideLevel;
 
@@ -17,9 +17,10 @@ namespace ClassLibrary.HarborFramwork.MarineData
         }
 
 
-        private void SetTideLevel(DateTime datre, double level)
+        public void SetTideLevel(DateTime dateTime, double level)
         {
-            tideLevel[datre] = level;
+            throw new NotImplementedException();
+            //tideLevel[dateTime] = level;
         }
 
         /// <summary>
@@ -39,5 +40,10 @@ namespace ClassLibrary.HarborFramwork.MarineData
             }
         }
 
+
+        /*public void SetTideLevel(DateTime dateTime, double v)
+        {
+            throw new NotImplementedException();
+        }*/
     }
 }
