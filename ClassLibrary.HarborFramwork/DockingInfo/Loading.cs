@@ -8,7 +8,7 @@ using static ClassLibrary.HarborFramwork.ContainerYardInfo.Container;
 
 namespace ClassLibrary.HarborFramwork.DockingInfo
 {
-    internal class Loading
+    public class Loading
     {
         private ContainerYards containerYards { get; set; }
         private TimeSlot timestamp { get; set; }
