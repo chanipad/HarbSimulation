@@ -11,5 +11,6 @@ namespace ClassLibrary.HarborFramwork.DockingInfo
     {
         public DockSpace dockSpace { get; set; }
         public TimeSlot timestamp { get; set; }
+        public object DockingPlace { get; internal set; }
     }
 }

@@ -8,9 +8,10 @@ using static ClassLibrary.HarborFramwork.ContainerYardInfo.Container;
 
 namespace ClassLibrary.HarborFramwork.DockingInfo
 {
-    internal class Loading
+    public class Loading
     {
+        public object LoadingPlace { get; internal set; }
         private ContainerYards containerYards { get; set; }
-        private TimeSlot timestamp { get; set; }
+        public TimeSlot timestamp { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ClassLibrary.HarborFramework.ShipInfo;
+using static ClassLibrary.HarborFramwork.Enums;
 
 namespace ClassLibrary.HarborFramwork.DockingInfo
 {

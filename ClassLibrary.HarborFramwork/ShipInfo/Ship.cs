@@ -1,4 +1,6 @@
-﻿namespace ClassLibrary.HarborFramework.ShipInfo
+﻿using static ClassLibrary.HarborFramwork.Enums;
+
+namespace ClassLibrary.HarborFramework.ShipInfo
 {
     /// <summary>
     /// Represents a ship in the harbor.
