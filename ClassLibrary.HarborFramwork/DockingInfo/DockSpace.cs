@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using ClassLibrary.HarborFramwork.ShipInfo;
 using ClassLibrary.HarborFramwork.Utilities;
 
+
 namespace ClassLibrary.HarborFramwork.DockingInfo
 {
-    internal class DockSpace
+    public class DockSpace
     {
         public int DockSpaceNumber { get; set; }
         public DockSpaceType Type { get; set; }

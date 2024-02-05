@@ -2,7 +2,7 @@
 
 namespace ClassLibrary.HarborFramwork.DockingInfo
 {
-    internal class Location
+    public class Location
     {
         private TimeSlot timestamp { get; set; }
         private String DockLocation { get; set; }

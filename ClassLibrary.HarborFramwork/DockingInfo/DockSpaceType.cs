@@ -1,6 +1,6 @@
 ﻿namespace ClassLibrary.HarborFramwork.DockingInfo
 {
-    internal enum DockSpaceType
+    public enum DockSpaceType
     {
         CARGO,
         CRUISE,
