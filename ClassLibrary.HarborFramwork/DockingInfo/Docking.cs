@@ -9,7 +9,7 @@ namespace ClassLibrary.HarborFramwork.DockingInfo
 {
     public class Docking
     {
-        private DockSpace dockSpacen { get; set; }
-        private TimeSlot timestamp { get; set; }
+        public DockSpace dockSpace { get; set; }
+        public TimeSlot timestamp { get; set; }
     }
 }
