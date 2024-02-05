@@ -25,6 +25,9 @@ namespace ClassLibrary.HarborFramwork.ContainerYardInfo
         }
 
 
+
+
+
         /// <summary>
         /// Represent container yard zone 
         /// </summary>
@@ -46,6 +49,9 @@ namespace ClassLibrary.HarborFramwork.ContainerYardInfo
                 ContainersList.Add(container);
             }
         }
+
+
+
 
 
         /// <summary>
