@@ -6,6 +6,7 @@ namespace ClassLibrary.HarborFramwork.DockingInfo
 {
     public class Loading
     {
+        public object LoadingPlace { get; internal set; }
         private ContainerYards containerYards { get; set; }
         private TimeSlot timestamp { get; set; }
 
