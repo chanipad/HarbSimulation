@@ -12,8 +12,6 @@ namespace HarbSimulation
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-
 
             TideInformation tideInfo = new TideInformation();
             // Set some tide levels

@@ -1,4 +1,5 @@
 ﻿using ClassLibrary.HarborFramework.ShipInfo;
+using ClassLibrary.HarborFramwork.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,6 @@ namespace ClassLibrary.HarborFramework.Utilities
         /// Ships from recurring sailings are included without duplication, even if they are scheduled on multiple days.
         /// </remarks>
         
-        
-        /*
         public List<Ship> GetAllSailings()
         {
             var allShips = new List<Ship>();
@@ -46,8 +45,8 @@ namespace ClassLibrary.HarborFramework.Utilities
             }
 
             return allShips;
-           }
-        */
+        }
+        
 
     }
 }
