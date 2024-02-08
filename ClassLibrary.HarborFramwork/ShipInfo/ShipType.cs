@@ -1,6 +1,8 @@
-﻿namespace ClassLibrary.HarborFramework.ShipInfo
+﻿using static ClassLibrary.HarborFramwork.Enums;
+
+namespace ClassLibrary.HarborFramework.ShipInfo
 {
-    /// <summary>
+    /*/// <summary>
     /// Represents the type of a ship.
     /// </summary>
     public enum ShipType
@@ -9,6 +11,8 @@
         CRUISE_SHIP,
         LEISURE_BOAT
     }
+    */
+
 
     /// <summary>
     /// Provides utility methods related to ship speeds.

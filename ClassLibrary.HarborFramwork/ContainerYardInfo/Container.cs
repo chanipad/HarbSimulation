@@ -26,6 +26,8 @@ namespace ClassLibrary.HarborFramwork.ContainerYardInfo
 
 
 
+
+
         /// <summary>
         /// Represent container yard zone 
         /// </summary>
@@ -51,12 +53,13 @@ namespace ClassLibrary.HarborFramwork.ContainerYardInfo
 
 
 
+
         /// <summary>
         /// Represent container history location.
         /// </summary>
         public class ContainerHistory
         {
-            private List<Location> location { get; set; }
+            public List<Location> location { get; set; }
 
 
             /// <summary>
@@ -68,9 +71,9 @@ namespace ClassLibrary.HarborFramwork.ContainerYardInfo
                 Location loc = new()
                 {
                     location = newLocation,
-                    timestamp = DateTime.Now
+                    Timestamp = DateTime.Now
                 };
-                location.Add(newLocation);
+                location.Add(loc);
             }
 
 
@@ -82,11 +85,9 @@ namespace ClassLibrary.HarborFramwork.ContainerYardInfo
             {
                 if (location.Count > 0)
                 {
-                    Location loc = new Location
-                    {
-                        location = newLocation,
-                        timestamp = DateTime.Now
-                    };
+                    Location loc = new Location();
+                    loc.location = newLocation;
+                    loc.Timestamp = DateTime.Now;
                     location[location.Count - 1] = loc;
                 }
                 else
@@ -105,7 +106,6 @@ namespace ClassLibrary.HarborFramwork.ContainerYardInfo
                 return location.Count;
             }
         }
-
 
     }
 }

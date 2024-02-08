@@ -30,5 +30,35 @@ namespace ClassLibrary.HarborFramwork
             Saturday,
             Sunday
         }
+
+        public enum ShipType
+        {
+            CARGO_SHIP,
+            CRUISE_SHIP,
+            LEISURE_BOAT
+        }
+
+        public enum DockSpaceType
+        {
+            CARGO,
+            CRUISE,
+            BERTH
+        }
+
+        public enum TrafficConditions
+        { Light, 
+          Moderate,
+          Heavy
+        }
+
+        public enum WeatherForecast 
+        { 
+            Sunny, 
+            Rainy, 
+            Cloudy,
+            Wind,
+            Thunderstorm,
+            Snow
+        }
     }
 }
