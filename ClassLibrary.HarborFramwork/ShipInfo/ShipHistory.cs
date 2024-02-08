@@ -32,14 +32,14 @@ namespace ClassLibrary.HarborFramework.ShipInfo
             foreach (var docking in Dockings)
             {
 
-                Console.WriteLine($"Docked at: {docking.DockSpace}, Time: {docking.Timestamp}");
+                Console.WriteLine($"Docked at: {docking.dockSpace}, Time: {docking.timestamp}");
 
             }
 
             Console.WriteLine("\nLoading History:");
             foreach (var loading in Loadings)
             {
-                Console.WriteLine($"Loaded at: {loading.Loading}, Time: {loading.Timestamp}");
+                Console.WriteLine($"Loaded at: {loading.}, Time: {loading.}");
             }
         }
     }

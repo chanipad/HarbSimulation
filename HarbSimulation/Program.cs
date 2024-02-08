@@ -1,5 +1,4 @@
-﻿using System;
-using ClassLibrary.HarborFramework.ShipInfo;
+﻿using ClassLibrary.HarborFramework.ShipInfo;
 
 namespace HarbSimulation
 {
