@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLibrary.HarborFramwork.Utilities
+namespace ClassLibrary.HarborFramework.Utilities
 {
     internal class SingleSailing
     {
         private TimeSlot timestamp { get; set; }
+
     }
 }

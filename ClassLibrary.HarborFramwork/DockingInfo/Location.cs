@@ -1,6 +1,6 @@
-﻿using ClassLibrary.HarborFramwork.Utilities;
+﻿using ClassLibrary.HarborFramework.Utilities;
 
-namespace ClassLibrary.HarborFramwork.DockingInfo
+namespace ClassLibrary.HarborFramework.DockingInfo
 {
     public class Location
     {
@@ -17,7 +17,7 @@ namespace ClassLibrary.HarborFramwork.DockingInfo
             TimeSlot = timeSlot;
         }
         */
-        public Location(int dockLocation, DateTime timeSlot)
+        public Location(string dockLocation, DateTime timeSlot)
         {
             DockLocation = dockLocation;
             Timestamp = timeSlot;

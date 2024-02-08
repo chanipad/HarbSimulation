@@ -1,11 +1,11 @@
 ﻿using ClassLibrary.HarborFramework.ShipInfo;
 
-namespace ClassLibrary.HarborFramwork.Utilities
+namespace ClassLibrary.HarborFramework.Utilities
 {
     public class Inspection
     {
         private DateTime inspectionDate { get; set; }
-        private Ship shipUpForInspection { get; set; }
+        public Ship shipUpForInspection { get; set; }
         public static void performInspection() { Inspection.performInspection(); }
     }
 
@@ -13,6 +13,7 @@ namespace ClassLibrary.HarborFramwork.Utilities
     /// Schedules a random inspection from a list of ships.
     /// </summary>
     /// <param name="ships">List of ships to choose from.</param>
+    /*
     public void ScheduleRandomInspection(List<Ship> ships)
     {
         if (ships == null || ships.Count == 0)
@@ -24,4 +25,5 @@ namespace ClassLibrary.HarborFramwork.Utilities
         int index = rnd.Next(ships.Count);
         this.shipUpForInspection = ships[index];
     }
+    */
 }

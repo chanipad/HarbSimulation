@@ -1,4 +1,4 @@
-﻿using static ClassLibrary.HarborFramwork.Enums;
+﻿using static ClassLibrary.HarborFramework.Enums;
 
 namespace ClassLibrary.HarborFramework.ShipInfo
 {
@@ -8,6 +8,7 @@ namespace ClassLibrary.HarborFramework.ShipInfo
     public class Ship
     {
         private int Id { get; set; }
+        public string Name { get; set; }
         private ShipType ShipType { get; set; }
         private ShipHistory History { get; set; }
         private ShipCertificate Certificate { get; set; }

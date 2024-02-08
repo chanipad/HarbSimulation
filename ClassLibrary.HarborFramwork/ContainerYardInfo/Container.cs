@@ -4,16 +4,17 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ClassLibrary.HarborFramwork.DockingInfo;
+using ClassLibrary.HarborFramework.DockingInfo;
 
-namespace ClassLibrary.HarborFramwork.ContainerYardInfo
+namespace ClassLibrary.HarborFramework.ContainerYardInfo
 {
 
     /// <summary>
     /// Represent container information.
     /// </summary>
-    public class Container
+    public class Container : IHarb
     {
+        
         private int containerId { get; set; }
         private List<Location> location { get; set; } = new List<Location>();
 
@@ -24,15 +25,26 @@ namespace ClassLibrary.HarborFramwork.ContainerYardInfo
             containerId = containId;
         }
 
-
-
-
-
-        /// <summary>
-        /// Represent container yard zone 
-        /// </summary>
-        public class ContainerYards
+        public Container()
         {
+            this.location = new List<Location>();
+        }
+
+
+        public void Print()
+        {
+            Console.WriteLine("Container Yard zone: ");
+        }
+
+
+
+    /// <summary>
+    /// Represent container yard zone 
+    /// </summary>
+    public class ContainerYards
+        {
+            internal object Location;
+
             private string ContainerYardZone { get; set; }
             private List<Container> ContainersList { get; set; } = new List<Container>();
 
