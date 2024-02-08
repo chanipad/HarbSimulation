@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary.HarborFramwork.Utilities
 {
-    internal class SailingRegulations
+    public class SailingRegulations
     {
         private AccessControlActions accessControl { get; set; }
         private List<ShipCertificate> shipCertificates { get; set; }
