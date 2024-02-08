@@ -1,18 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ClassLibrary.HarborFramwork.Utilities;
+﻿using ClassLibrary.HarborFramework.Utilities;
 
-namespace ClassLibrary.HarborFramwork.DockingInfo
+namespace ClassLibrary.HarborFramework.DockingInfo
 {
     public class Location
     {
-        public required DateTime timestamp { get; set; }
-        public int location { get; set; }
+        internal Location location;
 
-        public static implicit operator int(Location v)
+        //private TimeSlot Timestamp { get; set; }
+        private String DockLocation { get; set; }
+        public Location NewLocation { get; set; }
+        public DateTime Timestamp { get; set; }
+
+        /*public Location(int dockLocation, TimeSlot timeSlot)
+        {
+            DockLocation = dockLocation;
+            TimeSlot = timeSlot;
+        }
+        */
+        public Location(string dockLocation, DateTime timeSlot)
+        {
+            DockLocation = dockLocation;
+            Timestamp = timeSlot;
+        }
+
+        public Location(string newLocation)
+        {
+            NewLocation = newLocation;
+
+        }
+
+        public Location()
+        {
+        }
+
+        public static implicit operator Location(string v)
         {
             throw new NotImplementedException();
         }

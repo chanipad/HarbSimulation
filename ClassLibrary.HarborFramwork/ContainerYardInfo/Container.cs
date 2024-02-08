@@ -4,16 +4,17 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ClassLibrary.HarborFramwork.DockingInfo;
+using ClassLibrary.HarborFramework.DockingInfo;
 
-namespace ClassLibrary.HarborFramwork.ContainerYardInfo
+namespace ClassLibrary.HarborFramework.ContainerYardInfo
 {
 
     /// <summary>
     /// Represent container information.
     /// </summary>
-    public class Container
+    public class Container : IHarb
     {
+        
         private int containerId { get; set; }
         private List<Location> location { get; set; } = new List<Location>();
 
@@ -24,13 +25,26 @@ namespace ClassLibrary.HarborFramwork.ContainerYardInfo
             containerId = containId;
         }
 
-
-
-        /// <summary>
-        /// Represent container yard zone 
-        /// </summary>
-        public class ContainerYards
+        public Container()
         {
+            this.location = new List<Location>();
+        }
+
+
+        public void Print()
+        {
+            Console.WriteLine("Container Yard zone: ");
+        }
+
+
+
+    /// <summary>
+    /// Represent container yard zone 
+    /// </summary>
+    public class ContainerYards
+        {
+            internal object Location;
+
             private string ContainerYardZone { get; set; }
             private List<Container> ContainersList { get; set; } = new List<Container>();
 
@@ -51,12 +65,13 @@ namespace ClassLibrary.HarborFramwork.ContainerYardInfo
 
 
 
+
         /// <summary>
         /// Represent container history location.
         /// </summary>
         public class ContainerHistory
         {
-            private List<Location> location { get; set; }
+            public List<Location> location { get; set; }
 
 
             /// <summary>
@@ -68,9 +83,9 @@ namespace ClassLibrary.HarborFramwork.ContainerYardInfo
                 Location loc = new()
                 {
                     location = newLocation,
-                    timestamp = DateTime.Now
+                    Timestamp = DateTime.Now
                 };
-                location.Add(newLocation);
+                location.Add(loc);
             }
 
 
@@ -82,11 +97,9 @@ namespace ClassLibrary.HarborFramwork.ContainerYardInfo
             {
                 if (location.Count > 0)
                 {
-                    Location loc = new Location
-                    {
-                        location = newLocation,
-                        timestamp = DateTime.Now
-                    };
+                    Location loc = new Location();
+                    loc.location = newLocation;
+                    loc.Timestamp = DateTime.Now;
                     location[location.Count - 1] = loc;
                 }
                 else
@@ -105,7 +118,6 @@ namespace ClassLibrary.HarborFramwork.ContainerYardInfo
                 return location.Count;
             }
         }
-
 
     }
 }

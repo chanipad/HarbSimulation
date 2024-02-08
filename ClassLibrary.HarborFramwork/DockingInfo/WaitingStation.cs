@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClassLibrary.HarborFramwork.DockingInfo
+﻿namespace ClassLibrary.HarborFramework.DockingInfo
 {
     public class WaitingStation
     {
-        public int locationNumber { get; set; }
+        public int LocationNumber { get; set; }
 
-        public void isLocationBusy() { }
+
+        /*
+        public bool IsLocationBusy(List<Docking> scheduledDockings)
+        {
+            return scheduledDockings.Any(d => d.DockSpace.DockSpaceNumber == LocationNumber);
+        }
+        */
     }
 }
