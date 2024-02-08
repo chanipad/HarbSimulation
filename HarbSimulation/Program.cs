@@ -1,4 +1,8 @@
-﻿using ClassLibrary.HarborFramework.ShipInfo;
+﻿using ClassLibrary.HarborFramework;
+using ClassLibrary.HarborFramework.DockingInfo;
+using ClassLibrary.HarborFramework.ShipInfo;
+using static ClassLibrary.HarborFramework.ContainerYardInfo.Container;
+using static ClassLibrary.HarborFramework.Enums;
 
 namespace HarbSimulation
 {
@@ -11,11 +15,15 @@ namespace HarbSimulation
             
             Ship cargoShip = new Ship(1, ShipType.CARGO_SHIP);
 
-           
-            cargoShip.GetHistory().AddDocking(new Docking { DockSpace = "First place", Timestamp = DateTime.Now });
-            cargoShip.GetHistory().AddLoading(new Loading { Loading = "Cargo Area 1", Timestamp = DateTime.Now });
 
-            
+            // Opprett en ny dokking ved å bruke konstruktøren som tar imot DockSpace og TimeSlot som parametre
+            Docking docking = new Docking(dockSpace: new DockSpace(1), null);
+            cargoShip.GetHistory().AddDocking(docking);
+
+            Loading loading = new Loading(containerYards: new ContainerYards(), null);
+            cargoShip.GetHistory().AddLoading(loading);
+
+
             ShipCertificate certificate = new ShipCertificate
             {
                 CertificateID = 544,

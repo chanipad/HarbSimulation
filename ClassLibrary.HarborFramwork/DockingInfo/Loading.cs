@@ -1,16 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ClassLibrary.HarborFramwork.Utilities;
-using static ClassLibrary.HarborFramwork.ContainerYardInfo.Container;
+using ClassLibrary.HarborFramework.ContainerYardInfo;
+using ClassLibrary.HarborFramework.Utilities;
+using static ClassLibrary.HarborFramework.ContainerYardInfo.Container;
 
-namespace ClassLibrary.HarborFramwork.DockingInfo
+namespace ClassLibrary.HarborFramework.DockingInfo
 {
     public class Loading
     {
-        private ContainerYards containerYards { get; set; }
-        private TimeSlot timestamp { get; set; }
+        public object LoadingPlace { get; private set; }
+        public ContainerYards ContainerYards { get; private set; }
+        public TimeSlot Timestamp { get; private set; }
+
+        public Loading(ContainerYards containerYards, TimeSlot timeSlot)
+        {
+            ContainerYards = containerYards;
+            Timestamp = timeSlot;
+        }
+
+        public void ScheduleLoading()
+        {
+            Console.WriteLine($"Loading scheduled at {ContainerYards.Location} on {Timestamp.startTime}");
+        }
     }
 }

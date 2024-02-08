@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLibrary.HarborFramwork.Utilities
+namespace ClassLibrary.HarborFramework
 {
     public class TimeSlot
     {
-        private DateTime startTime { get; set; }
-        private DateTime endTime { get; set; }
+        public DateTime startTime {  get; set; }
+        public DateTime endTime { get; set; }
     }
 }
