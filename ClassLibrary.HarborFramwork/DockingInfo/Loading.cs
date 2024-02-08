@@ -1,14 +1,17 @@
-﻿using ClassLibrary.HarborFramwork.ContainerYardInfo;
-using ClassLibrary.HarborFramwork.Utilities;
-using static ClassLibrary.HarborFramwork.ContainerYardInfo.Container;
+﻿using ClassLibrary.HarborFramework.ContainerYardInfo;
+using ClassLibrary.HarborFramework.Utilities;
+using static ClassLibrary.HarborFramework.ContainerYardInfo.Container;
 
-namespace ClassLibrary.HarborFramwork.DockingInfo
+namespace ClassLibrary.HarborFramework.DockingInfo
 {
     public class Loading
     {
         public object LoadingPlace { get; internal set; }
         private ContainerYards containerYards { get; set; }
         private TimeSlot timestamp { get; set; }
+        public ContainerYards ContainerYards { get; }
+        internal TimeSlot TimeSlot { get; }
+        public object Timestamp { get; internal set; }
 
         public Loading(ContainerYards containerYards, TimeSlot timeSlot)
         {
@@ -18,7 +21,7 @@ namespace ClassLibrary.HarborFramwork.DockingInfo
 
         public void ScheduleLoading()
         {
-            Console.WriteLine($"Loading scheduled at {ContainerYards.Location} on {TimeSlot.StartTime}");
+            Console.WriteLine($"Loading scheduled at {ContainerYards.Location} on {TimeSlot.startTime}");
         }
     }
 }

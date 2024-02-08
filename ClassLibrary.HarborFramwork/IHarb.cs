@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassLibrary.HarborFramework.ContainerYardInfo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary.HarborFramework
 {
-    public class TimeSlot
+    interface IHarb
     {
-        public DateTime startTime {  get; set; }
-        public DateTime endTime { get; set; }
+        void Print();
+
     }
+
+    
 }

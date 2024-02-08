@@ -1,10 +1,12 @@
 ﻿using ClassLibrary.HarborFramework.ShipInfo;
 
-namespace ClassLibrary.HarborFramwork.Utilities
+namespace ClassLibrary.HarborFramework.Utilities
 {
     public class RecurringSailing
     {
         private Dictionary<DayOfWeek, List<Ship>> weeklySailings = new Dictionary<DayOfWeek, List<Ship>>();
+
+        public object WeeklySailings { get; internal set; }
 
         /// <summary>
         /// Initializes a new instance of the RecurringSailing class, setting up a weekly sailing schedule.
@@ -21,6 +23,7 @@ namespace ClassLibrary.HarborFramwork.Utilities
             }
         }
 
+
         /// <summary>
         /// Retrieves a list of ships scheduled for sailing on a specified day of the week.
         /// </summary>
@@ -34,6 +37,7 @@ namespace ClassLibrary.HarborFramwork.Utilities
         {
             return weeklySailings[dayOfWeek];
         }
+
 
         /// <summary>
         /// Adds a ship to the recurring sailing schedule for a specified day of the week.
@@ -66,10 +70,6 @@ namespace ClassLibrary.HarborFramwork.Utilities
             weeklySailings[dayOfWeek].Remove(ship);
         }
 
-        public List<Ship> GetShipsForDay(DayOfWeek dayOfWeek)
-        {
-            return weeklySailings[dayOfWeek];
-        }
 
         /// <summary>
         /// Gets the list of sailing details for a specific day of the week.
