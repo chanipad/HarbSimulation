@@ -10,6 +10,7 @@ namespace ClassLibrary.HarborFramwork.Utilities
     public class SingleSailing
     {
         private Dictionary<Ship, DateTime> sailings = new Dictionary<Ship, DateTime>();
+        public List<Ship> sailings = new List<Ship>();
 
         /// <summary>
         /// Adds a ship to a single sailing schedule.
@@ -18,7 +19,7 @@ namespace ClassLibrary.HarborFramwork.Utilities
         /// <param name="sailingDate">The date and time of the sailing.</param>
         public void AddSailing(Ship ship, DateTime sailingDate)
         {
-            sailings.Add(ship, sailingDate);
+            sailings.Add(new Ship(ship), new sailingDate);
         }
 
         /// <summary>
