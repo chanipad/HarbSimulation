@@ -3,7 +3,7 @@ using ClassLibrary.HarborFramework.Utilities;
 using System.Security.AccessControl;
 
 
-namespace ClassLibrary.HarborFramwork.Utilities
+namespace ClassLibrary.HarborFramework.Utilities
 {
     public class SailingRegulations
     {

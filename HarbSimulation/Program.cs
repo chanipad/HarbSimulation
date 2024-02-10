@@ -1,21 +1,45 @@
-﻿using ClassLibrary.HarborFramwork.MarineData;
+﻿using ClassLibrary.HarborFramework;
+using ClassLibrary.HarborFramework.DockingInfo;
+using ClassLibrary.HarborFramework.ShipInfo;
+using static ClassLibrary.HarborFramework.ContainerYardInfo.Container;
+using static ClassLibrary.HarborFramework.Enums;
 
 namespace HarbSimulation
 {
-    public class Program
+    internal class Program
     {
-
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Console.WriteLine("Welcome to the Harbor Simulation!");
 
-            TideInformation tideInfo = new TideInformation();
-            // Set some tide levels
-            tideInfo.SetTideLevel(new DateTime(2024, 2, 4), 5.2);
-            tideInfo.SetTideLevel(new DateTime(2024, 2, 5), 3.8);
-            // Get tide level for specific dates
-            Console.WriteLine("Tide level on 2024-02-04: " + tideInfo.GetTideLevel(new DateTime(2024, 2, 4))); // Output: 5.2
-            Console.WriteLine("Tide level on 2024-02-06: " + tideInfo.GetTideLevel(new DateTime(2024, 2, 6))); // Output: -1 (Tide information not available)
+            
+            Ship cargoShip = new Ship(1, ShipType.CARGO_SHIP);
+
+
+            // Opprett en ny dokking ved å bruke konstruktøren som tar imot DockSpace og TimeSlot som parametre
+            Docking docking = new Docking(dockSpace: new DockSpace(1), null);
+            cargoShip.GetHistory().AddDocking(docking);
+
+            Loading loading = new Loading(containerYards: new ContainerYards(), null);
+            cargoShip.GetHistory().AddLoading(loading);
+
+
+            ShipCertificate certificate = new ShipCertificate
+            {
+                CertificateID = 544,
+                ExpirationDate = DateTime.Now.AddDays(15),
+                HasAccessControlClearance = true,
+                IsInspectionPerformed = true
+            };
+
+            
+            bool isValid = ShipCertificate.ValidateCertificate(certificate);
+
+            
+            Console.WriteLine($"This Certificate is valid: {isValid}");
+
+      
+            cargoShip.GetHistory().DisplayHistory();
         }
     }
 }

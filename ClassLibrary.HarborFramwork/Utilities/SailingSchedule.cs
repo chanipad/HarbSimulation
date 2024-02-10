@@ -1,7 +1,8 @@
 ﻿using ClassLibrary.HarborFramework.ShipInfo;
 using ClassLibrary.HarborFramework.Utilities;
 
-namespace ClassLibrary.HarborFramwork.Utilities
+
+namespace ClassLibrary.HarborFramework.Utilities
 {
     public class SailingSchedule
     {
@@ -12,6 +13,7 @@ namespace ClassLibrary.HarborFramwork.Utilities
         /// Retrieves a list of all ships from both single and recurring sailings.
         /// </summary>
         /// <returns>A list of <see cref="Ship"/> objects that are scheduled for either single or recurring sailings.</returns>
+
         public List<Ship> GetAllSailings()
         {
             var allShips = new List<Ship>();

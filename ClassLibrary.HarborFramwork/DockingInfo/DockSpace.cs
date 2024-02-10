@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using ClassLibrary.HarborFramwork.ShipInfo;
-using ClassLibrary.HarborFramwork.Utilities;
+using ClassLibrary.HarborFramework.ShipInfo;
+using ClassLibrary.HarborFramework.Utilities;
+using static ClassLibrary.HarborFramework.Enums;
 
 
-namespace ClassLibrary.HarborFramwork.DockingInfo
+namespace ClassLibrary.HarborFramework.DockingInfo
 {
     public class DockSpace
     {
@@ -35,7 +36,7 @@ namespace ClassLibrary.HarborFramwork.DockingInfo
         }
     }
 
-    internal class ScheduledShip
+    public class ScheduledShip
     {
         public Ship Ship { get; set; }
         public TimeSlot TimeSlot { get; set; }

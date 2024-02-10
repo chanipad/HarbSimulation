@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLibrary.HarborFramwork.MarineData
+namespace ClassLibrary.HarborFramework.MarineData
 {
     public class TideInformation
     {
@@ -19,7 +19,7 @@ namespace ClassLibrary.HarborFramwork.MarineData
 
         public void SetTideLevel(DateTime dateTime, double level)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
             //tideLevel[dateTime] = level;
         }
 
@@ -36,7 +36,7 @@ namespace ClassLibrary.HarborFramwork.MarineData
             }
             else 
             { 
-                return -1;   // Return a default value indicating tide information not available
+                return (double)-1;   // Return a default value indicating tide information not available
             }
         }
 

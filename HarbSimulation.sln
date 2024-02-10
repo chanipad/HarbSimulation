@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HarbSimulation", "HarbSimulation\HarbSimulation.csproj", "{93F487B2-0CDD-4B30-9434-3C795E82BC8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HarbSimulation", "HarbSimulation\HarbSimulation.csproj", "{93F487B2-0CDD-4B30-9434-3C795E82BC8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.HarborFramwork", "ClassLibrary.HarborFramwork\ClassLibrary.HarborFramwork.csproj", "{7E376787-1D3C-41C2-B928-EC9B7DD53124}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary.HarborFramework", "ClassLibrary.HarborFramwork\ClassLibrary.HarborFramework.csproj", "{7E376787-1D3C-41C2-B928-EC9B7DD53124}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

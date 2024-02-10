@@ -1,4 +1,4 @@
-﻿using ClassLibrary.HarborFramwork.DockingInfo;
+﻿using ClassLibrary.HarborFramework.DockingInfo;
 
 namespace ClassLibrary.HarborFramework.ShipInfo
 {
@@ -39,9 +39,10 @@ namespace ClassLibrary.HarborFramework.ShipInfo
             Console.WriteLine("\nLoading History:");
             foreach (var loading in Loadings)
             {
-                Console.WriteLine($"Loaded at: {loading.Loading}, Time: {loading.Timestamp}");
+                Console.WriteLine($"Loaded at: {loading.LoadingPlace}, Time: {loading.TimeSlot}");
             }
         }
+
     }
 }
 

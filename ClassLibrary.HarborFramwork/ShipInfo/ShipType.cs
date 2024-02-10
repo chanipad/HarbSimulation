@@ -1,4 +1,4 @@
-﻿using static ClassLibrary.HarborFramwork.Enums;
+﻿using static ClassLibrary.HarborFramework.Enums;
 
 namespace ClassLibrary.HarborFramework.ShipInfo
 {

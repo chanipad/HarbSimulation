@@ -6,6 +6,7 @@ namespace ClassLibrary.HarborFramework.Utilities
 {
     public class Inspection
     {
+
         private DateTime InspectionDate { get; set; }
 
         private Ship? ShipUpForInspection { get; set; }
@@ -16,6 +17,7 @@ namespace ClassLibrary.HarborFramework.Utilities
         /// <param name="ships">The list of ships from which one will be randomly selected for inspection.</param>
         /// <exception cref="ArgumentException">Thrown when the list of ships is null or empty.</exception>
         public void ScheduleRandomInspection(List<Ship> ships)
+
         {
             if (ships == null || ships.Count == 0)
             {
@@ -48,4 +50,5 @@ namespace ClassLibrary.HarborFramework.Utilities
             InspectionDate = DateTime.Now;
         }
     }
+    */
 }
