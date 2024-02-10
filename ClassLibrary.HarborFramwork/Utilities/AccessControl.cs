@@ -1,22 +1,34 @@
 ﻿using ClassLibrary.HarborFramework.ShipInfo;
+using System.Collections.Generic;
 
-namespace ClassLibrary.HarborFramwork.Utilities
+namespace ClassLibrary.HarborFramework.Utilities
 {
+    /// <summary>
+    /// Manages access control for ships, allowing for granting and revoking access.
+    /// </summary>
     public class AccessControl
     {
-        private List<Ship> accessList { get; set; }
-    }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccessControl"/> class.
+        /// </summary>
+        public AccessControl()
+        {
+            accessList = new List<Ship>();
+        }
 
-    /// <summary>
-    /// Grants access to a ship by adding it to the access list.
-    /// </summary>
-    /// <param name="ship">The ship to grant access to.</param>
-    /// <remarks>
-    /// If the ship is already in the access list, this method will not add it again,
-    /// preventing duplicates in the list.
-    /// </remarks>
+        /// <summary>
+        /// Gets or sets the list of ships that have been granted access.
+        /// </summary>
+        private List<Ship> accessList { get; set; } = new List<Ship>();
 
-    public void GrantAccess(Ship ship)
+        /// <summary>
+        /// Grants access to the specified ship, adding it to the access list if it's not already present.
+        /// </summary>
+        /// <param name="ship">The ship to grant access to.</param>
+        /// <remarks>
+        /// If the ship is already in the access list, it will not be added again.
+        /// </remarks>
+        public void GrantAccess(Ship ship)
         {
             if (!accessList.Contains(ship))
             {
@@ -24,30 +36,29 @@ namespace ClassLibrary.HarborFramwork.Utilities
             }
         }
 
-    /// <summary>
-    /// Revokes access from a ship by removing it from the access list.
-    /// </summary>
-    /// <param name="ship">The ship to revoke access from.</param>
-    /// <remarks>
-    /// If the ship is not found in the access list, this method will do nothing.
-    /// </remarks>
-    public void RevokeAccess(Ship ship)
-    {
-        accessList.Remove(ship);
-    }
+        /// <summary>
+        /// Revokes access from the specified ship, removing it from the access list.
+        /// </summary>
+        /// <param name="ship">The ship to revoke access from.</param>
+        /// <remarks>
+        /// If the ship is not found in the access list, no action is taken.
+        /// </remarks>
+        public void RevokeAccess(Ship ship)
+        {
+            accessList.Remove(ship);
+        }
 
-  
-    /// <summary>
-    /// Checks if a ship has been granted access (i.e., is present in the access list).
-    /// </summary>
-    /// <param name="ship">The ship to check access for.</param>
-    /// <returns>true if the ship has access, otherwise false.</returns>
-    /// <remarks>
-    /// This method searches the access list for the specified ship and returns
-    /// true if found, indicating the ship has been granted access.
-    /// </remarks>
-    public bool HasAccess(Ship ship)
-    {
-        return accessList.Contains(ship);
+        /// <summary>
+        /// Checks if the specified ship has been granted access.
+        /// </summary>
+        /// <param name="ship">The ship to check access for.</param>
+        /// <returns><c>true</c> if the ship has access; otherwise, <c>false</c>.</returns>
+        /// <remarks>
+        /// Access is determined by the presence of the ship in the access list.
+        /// </remarks>
+        public bool HasAccess(Ship ship)
+        {
+            return accessList.Contains(ship);
+        }
     }
 }

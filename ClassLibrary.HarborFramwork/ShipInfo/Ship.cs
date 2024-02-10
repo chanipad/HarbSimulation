@@ -7,7 +7,7 @@ namespace ClassLibrary.HarborFramework.ShipInfo
     /// </summary>
     public class Ship
     {
-        private int Id { get; set; }
+        public int Id { get; private set; }
         private ShipType ShipType { get; set; }
         private ShipHistory History { get; set; }
         private ShipCertificate Certificate { get; set; }
