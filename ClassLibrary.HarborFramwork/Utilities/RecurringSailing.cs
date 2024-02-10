@@ -1,7 +1,12 @@
 ﻿using ClassLibrary.HarborFramework.ShipInfo;
+using System;
+using System.Collections.Generic;
 
 namespace ClassLibrary.HarborFramework.Utilities
 {
+    /// <summary>
+    /// Manages the scheduling of recurring sailings for ships on a weekly basis.
+    /// </summary>
     public class RecurringSailing
     {
         private Dictionary<DayOfWeek, List<Ship>> weeklySailings = new Dictionary<DayOfWeek, List<Ship>>();
@@ -9,7 +14,7 @@ namespace ClassLibrary.HarborFramework.Utilities
         public object WeeklySailings { get; internal set; }
 
         /// <summary>
-        /// Initializes a new instance of the RecurringSailing class, setting up a weekly sailing schedule.
+        /// Initializes a new instance of the <see cref="RecurringSailing"/> class, setting up a weekly sailing schedule.
         /// </summary>
         /// <remarks>
         /// This constructor initializes the weekly sailing schedule with empty lists of ships for each day of the week,
@@ -72,10 +77,12 @@ namespace ClassLibrary.HarborFramework.Utilities
 
 
         /// <summary>
-        /// Gets the list of sailing details for a specific day of the week.
+        /// Removes a ship from the sailing schedule for all days of the week.
         /// </summary>
-        /// <param name="dayOfWeek">The day of the week for which to get the schedule.</param>
-        /// <returns>A list of SailingDetails for the specified day.</returns>
+        /// <param name="ship">The ship to be removed from all sailing schedules.</param>
+        /// <remarks>
+        /// This method iterates through all days of the week, removing the specified ship from the schedule for each day.
+        /// </remarks>
         public void RemoveShipFromAllSailings(Ship ship)
         {
             foreach (var daySailings in weeklySailings.Values)
@@ -83,7 +90,5 @@ namespace ClassLibrary.HarborFramework.Utilities
                 daySailings.Remove(ship);
             }
         }
-
-
     }
 }
