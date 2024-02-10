@@ -19,6 +19,7 @@ namespace ClassLibrary.HarborFramework.MarineData
 
         public void SetTideLevel(DateTime dateTime, double level)
         {
+            tideLevel[dateTime] = level;
             //throw new NotImplementedException();
             //tideLevel[dateTime] = level;
         }
@@ -28,11 +29,11 @@ namespace ClassLibrary.HarborFramework.MarineData
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public double GetTideLevel(DateTime date) 
+        public double GetTideLevel(DateTime dateTime) 
         { 
-            if (tideLevel.ContainsKey(date))
+            if (tideLevel.ContainsKey(dateTime))
             {
-                return tideLevel[date];
+                return tideLevel[dateTime];
             }
             else 
             { 
