@@ -1,18 +1,19 @@
-﻿using ClassLibrary.HarborFramwork.ShipInfo;
-using ClassLibrary.HarborFramwork.Utilities;
+﻿using ClassLibrary.HarborFramework.ShipInfo;
+using ClassLibrary.HarborFramework.Utilities;
 
 
-namespace ClassLibrary.HarborFramwork.DockingInfo
+namespace ClassLibrary.HarborFramework.DockingInfo
 {
     public class Docking
     {
         private DockSpace dockSpace { get; set; }
         private TimeSlot timestamp { get; set; }
 
-        public Docking(DockSpace dockSpace, TimeSlot timestamp)
+
+        public Docking(DockSpace dockSpace, TimeSlot timeSlot)
         {
             this.dockSpace = dockSpace;
-            this.timestamp = timestamp;
+            timestamp = timeSlot;
         }
 
         public void ScheduleDocking(Ship ship)
@@ -23,7 +24,7 @@ namespace ClassLibrary.HarborFramwork.DockingInfo
             }
             dockSpace.ScheduleShip(ship, timestamp);
 
-            Console.WriteLine($"Docking scheduled for {ship.Name} at dock space number {dockSpace.DockSpaceNumber} on {timestamp.StartTime}");
+            Console.WriteLine($"Docking scheduled for {ship.Name} at dock space number {dockSpace.DockSpaceNumber} on {timestamp.startTime}");
         }
     }
 }

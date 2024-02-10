@@ -1,46 +1,53 @@
-﻿using System;
+﻿using ClassLibrary.HarborFramework.ShipInfo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLibrary.HarborFramwork.Utilities
-public class SailingSchedule
+namespace ClassLibrary.HarborFramework.Utilities
 {
-    private List<SingleSailing> singleSailings = new List<SingleSailing>();
-    private RecurringSailing recurringSailing = new RecurringSailing();
-
-    /// <summary>
-    /// Retrieves a list of all ships from both single and recurring sailings.
-    /// </summary>
-    /// <returns>A list of <see cref="Ship"/> objects that are scheduled for either single or recurring sailings.</returns>
-    /// <remarks>
-    /// This method compiles ships from both single sailings and recurring weekly sailings into a single list.
-    /// Ships from recurring sailings are included without duplication, even if they are scheduled on multiple days.
-    /// </remarks>
-    public List<Ship> GetAllSailings()
+    public class SailingSchedule
     {
-        var allShips = new List<Ship>();
+        private List<SingleSailing> singleSailings = new List<SingleSailing>();
+        private RecurringSailing recurringSailing = new RecurringSailing();
 
-        // Add ships from single sailings
-        foreach (var singleSailing in singleSailings)
+        /// <summary>
+        /// Retrieves a list of all ships from both single and recurring sailings.
+        /// </summary>
+        /// <returns>A list of <see cref="Ship"/> objects that are scheduled for either single or recurring sailings.</returns>
+        /// <remarks>
+        /// This method compiles ships from both single sailings and recurring weekly sailings into a single list.
+        /// Ships from recurring sailings are included without duplication, even if they are scheduled on multiple days.
+        /// </remarks>
+        
+        
+        /*
+        public List<Ship> GetAllSailings()
         {
-            allShips.AddRange(singleSailing.Ships);
-        }
+            var allShips = new List<Ship>();
 
-        // Add ships from recurring sailings
-        foreach (var daySailings in recurringSailing.WeeklySailings.Values)
-        {
-            foreach (var ship in daySailings)
+            // Add ships from single sailings
+            foreach (var singleSailing in singleSailings)
             {
-                if (!allShips.Contains(ship))
+                allShips.AddRange(singleSailing.Ships);
+            }
+
+            // Add ships from recurring sailings
+            foreach (var daySailings in recurringSailing.WeeklySailings.Values)
+            {
+                foreach (var ship in daySailings)
                 {
-                    allShips.Add(ship);
+                    if (!allShips.Contains(ship))
+                    {
+                        allShips.Add(ship);
+                    }
                 }
             }
-        }
 
-        return allShips;
+            return allShips;
+           }
+        */
+
     }
-
 }

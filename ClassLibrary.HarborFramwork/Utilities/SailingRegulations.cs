@@ -6,9 +6,9 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLibrary.HarborFramwork.Utilities
+namespace ClassLibrary.HarborFramework.Utilities
 {
-    internal class SailingRegulations
+    public class SailingRegulations
     {
         private AccessControlActions accessControl { get; set; }
         private List<ShipCertificate> shipCertificates { get; set; }
