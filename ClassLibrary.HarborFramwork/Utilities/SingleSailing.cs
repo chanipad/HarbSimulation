@@ -19,7 +19,7 @@ namespace ClassLibrary.HarborFramwork.Utilities
         /// <param name="sailingDate">The date and time of the sailing.</param>
         public void AddSailing(Ship ship, DateTime sailingDate)
         {
-            sailings.Add(new Ship(ship), new sailingDate);
+            sailings.Add(new Ship(ship), new sailingDate());
         }
 
         /// <summary>
