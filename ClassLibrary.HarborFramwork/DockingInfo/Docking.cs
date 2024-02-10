@@ -8,7 +8,8 @@ namespace ClassLibrary.HarborFramework.DockingInfo
     {
         private DockSpace dockSpace { get; set; }
         private TimeSlot timestamp { get; set; }
-
+        public string V { get; private set; }
+        public DateTime Now { get; }
 
         public Docking(DockSpace dockSpace, TimeSlot timeSlot)
         {
