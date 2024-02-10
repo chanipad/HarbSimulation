@@ -12,6 +12,7 @@ namespace ClassLibrary.HarborFramework.ShipInfo
         private ShipHistory History { get; set; }
         private ShipCertificate Certificate { get; set; }
         public ShipType Type { get; internal set; }
+        public bool Inspected { get; internal set; }
 
         public Ship(int id, ShipType shipType)
         {
