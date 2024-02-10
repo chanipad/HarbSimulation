@@ -39,9 +39,10 @@ namespace ClassLibrary.HarborFramework.ShipInfo
             Console.WriteLine("\nLoading History:");
             foreach (var loading in Loadings)
             {
-                Console.WriteLine($"Loaded at: {loading.ScheduleLoading}, Time: {loading.Timestamp}");
+                Console.WriteLine($"Loaded at: {loading.LoadingPlace}, Time: {loading.TimeSlot}");
             }
         }
+
     }
 }
 
