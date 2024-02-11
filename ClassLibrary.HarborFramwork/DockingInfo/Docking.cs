@@ -6,10 +6,9 @@ namespace ClassLibrary.HarborFramework.DockingInfo
 {
     public class Docking
     {
-        public DockSpace dockSpace { get; set; }
+
+        public DockSpace dockSpace { get; private set; }
         public TimeSlot timestamp { get; set; }
-        public string V { get; private set; }
-        public DateTime Now { get; }
 
         public Docking(DockSpace dockSpace, TimeSlot timeSlot)
         {
