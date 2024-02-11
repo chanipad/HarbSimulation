@@ -24,10 +24,6 @@ namespace ClassLibrary.HarborFramework.ShipInfo
             Certificate = new ShipCertificate();
         }
 
-        public Ship(Ship ship)
-        {
-            this.ship = ship;
-        }
 
         public ShipHistory GetHistory()
         {
