@@ -8,13 +8,21 @@ namespace ClassLibrary.HarborFramework.DockingInfo
     {
         private DockSpace dockSpace { get; set; }
         private TimeSlot timestamp { get; set; }
-
+        public string V { get; private set; }
+        public DateTime Now { get; }
 
         public Docking(DockSpace dockSpace, TimeSlot timeSlot)
         {
             this.dockSpace = dockSpace;
             timestamp = timeSlot;
         }
+
+        public Docking(string v, DateTime now)
+        {
+            V = v;
+            Now = now;
+        }
+
 
         public void ScheduleDocking(Ship ship)
         {

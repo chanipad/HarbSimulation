@@ -9,7 +9,8 @@ namespace ClassLibrary.HarborFramwork.Utilities
 {
     public class SingleSailing
     {
-        private List<Ship> sailings = new List<Ship>();
+        private Dictionary<Ship, DateTime> sailings = new Dictionary<Ship, DateTime>();
+        public List<Ship> sailings = new List<Ship>();
 
         /// <summary>
         /// Adds a ship to a single sailing schedule.
@@ -18,7 +19,7 @@ namespace ClassLibrary.HarborFramwork.Utilities
         /// <param name="sailingDate">The date and time of the sailing.</param>
         public void AddSailing(Ship ship, DateTime sailingDate)
         {
-            sailings.Add(new Ship(ship), new sailingDate);
+            sailings.Add(new Ship(ship), new sailingDate());
         }
 
         /// <summary>
@@ -28,7 +29,7 @@ namespace ClassLibrary.HarborFramwork.Utilities
         /// <param name="sailingDate">The date and time of the sailing to remove.</param>
         public void RemoveSailing(Ship ship, DateTime sailingDate)
         {
-            sailings.RemoveAll(s => s.Ship == ship && s.SailingDate == sailingDate);
+            sailings.Remove(ship);
         }
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace ClassLibrary.HarborFramwork.Utilities
         /// <returns>A list of all sailings.</returns>
         public List<Ship> GetAllSailings()
         {
-            return new List<Ship>(sailings);
+            return sailings.Keys.ToList();
         }
     }
 }

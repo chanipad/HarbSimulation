@@ -1,9 +1,7 @@
 ﻿using ClassLibrary.HarborFramework.ShipInfo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ClassLibrary.HarborFramework.Utilities;
+using ClassLibrary.HarborFramwork.Utilities;
+
 
 namespace ClassLibrary.HarborFramework.Utilities
 {
@@ -30,13 +28,14 @@ namespace ClassLibrary.HarborFramework.Utilities
             // Add ships from single sailings
             foreach (var singleSailing in singleSailings)
             {
-                allShips.AddRange(singleSailing.Ships);
+                allShips.AddRange(singleSailing.GetAllSailings());
             }
 
-            // Add ships from recurring sailings
-            foreach (var daySailings in recurringSailing.WeeklySailings.Values)
+            // Add ships from recurring sailings without duplication
+            foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)))
             {
-                foreach (var ship in daySailings)
+                var shipsForDay = recurringSailing.GetShipsForDay(day);
+                foreach (var ship in shipsForDay)
                 {
                     if (!allShips.Contains(ship))
                     {

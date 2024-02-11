@@ -7,12 +7,14 @@ namespace ClassLibrary.HarborFramework.ShipInfo
     /// </summary>
     public class Ship
     {
-        private int Id { get; set; }
+
+        public int Id { get; private set; }
         public string Name { get; set; }
         private ShipType ShipType { get; set; }
         private ShipHistory History { get; set; }
         private ShipCertificate Certificate { get; set; }
         public ShipType Type { get; internal set; }
+        public bool Inspected { get; internal set; }
 
         public Ship(int id, ShipType shipType)
         {
@@ -20,6 +22,11 @@ namespace ClassLibrary.HarborFramework.ShipInfo
             ShipType = shipType;
             History = new ShipHistory();
             Certificate = new ShipCertificate();
+        }
+
+        public Ship(Ship ship)
+        {
+            this.ship = ship;
         }
 
         public ShipHistory GetHistory()
