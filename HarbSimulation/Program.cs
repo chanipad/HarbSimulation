@@ -17,10 +17,10 @@ namespace HarbSimulation
 
 
             // Opprett en ny dokking ved å bruke konstruktøren som tar imot DockSpace og TimeSlot som parametre
-            Docking docking = new Docking(dockSpace: new DockSpace(1), null);
+            Docking docking = new Docking(dockSpace: new DockSpace(1),new TimeSlot());
             cargoShip.GetHistory().AddDocking(docking);
 
-            Loading loading = new Loading(containerYards: new ContainerYards(), null);
+            Loading loading = new Loading(containerYards: new ContainerYards(), new TimeSlot());
             cargoShip.GetHistory().AddLoading(loading);
 
 
