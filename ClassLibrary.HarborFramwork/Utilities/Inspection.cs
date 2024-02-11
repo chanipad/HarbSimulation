@@ -50,5 +50,4 @@ namespace ClassLibrary.HarborFramework.Utilities
             InspectionDate = DateTime.Now;
         }
     }
-    */
 }

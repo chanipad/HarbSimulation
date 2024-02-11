@@ -14,16 +14,22 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         public List<ShipType> AllowedShipTypes { get; set; }
         public List<ScheduledShip> ScheduledShips { get; set; } = new List<ScheduledShip>();
 
+
+
         public DockSpace(int dockSpaceNumber)
         {
             DockSpaceNumber = dockSpaceNumber;
         }
+
+
 
         public void ConfigureDockSpace(DockSpaceType type, List<ShipType> allowedShipTypes)
         {
             Type = type;
             AllowedShipTypes = allowedShipTypes;
         }
+
+
 
         public bool ScheduleShip(Ship ship, TimeSlot timeSlot)
         {

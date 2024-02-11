@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ClassLibrary.HarborFramework.DockingInfo;
+using ClassLibrary.HarborFramework.Interfaces;
 
 namespace ClassLibrary.HarborFramework.ContainerYardInfo
 {

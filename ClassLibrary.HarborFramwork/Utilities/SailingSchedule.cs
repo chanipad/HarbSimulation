@@ -1,5 +1,6 @@
 ﻿using ClassLibrary.HarborFramework.ShipInfo;
 using ClassLibrary.HarborFramework.Utilities;
+using ClassLibrary.HarborFramwork.Utilities;
 
 
 namespace ClassLibrary.HarborFramework.Utilities
@@ -13,7 +14,13 @@ namespace ClassLibrary.HarborFramework.Utilities
         /// Retrieves a list of all ships from both single and recurring sailings.
         /// </summary>
         /// <returns>A list of <see cref="Ship"/> objects that are scheduled for either single or recurring sailings.</returns>
-
+        /// <remarks>
+        /// This method compiles ships from both single sailings and recurring weekly sailings into a single list.
+        /// Ships from recurring sailings are included without duplication, even if they are scheduled on multiple days.
+        /// </remarks>
+        
+        
+        /*
         public List<Ship> GetAllSailings()
         {
             var allShips = new List<Ship>();
@@ -38,6 +45,8 @@ namespace ClassLibrary.HarborFramework.Utilities
             }
 
             return allShips;
-        }
+           }
+        */
+
     }
 }
