@@ -13,7 +13,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
     /// <summary>
     /// Represent container information.
     /// </summary>
-    public class Container : IHarb
+    public class Container 
     {
         
         private int containerId { get; set; }
