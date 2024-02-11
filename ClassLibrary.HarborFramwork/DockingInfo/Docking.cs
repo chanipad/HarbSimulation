@@ -16,13 +16,6 @@ namespace ClassLibrary.HarborFramework.DockingInfo
             timestamp = timeSlot;
         }
 
-        public Docking(string v, DateTime now)
-        {
-            V = v;
-            Now = now;
-        }
-
-
         public void ScheduleDocking(Ship ship)
         {
             if (!dockSpace.AllowedShipTypes.Contains(ship.Type))
