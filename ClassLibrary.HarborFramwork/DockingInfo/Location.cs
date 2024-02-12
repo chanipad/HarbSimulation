@@ -1,11 +1,12 @@
-﻿using ClassLibrary.HarborFramework.Utilities;
+﻿using ClassLibrary.HarborFramework.Interfaces;
+using ClassLibrary.HarborFramework.Utilities;
 
 namespace ClassLibrary.HarborFramework.DockingInfo
 {
     /// <summary>
     /// Representerer en lokasjon med tilknytning til en spesifikk dokkplass og tidspunkt.
     /// </summary>
-    public class Location
+    public class Location:ILocation
     {
         /// <summary>
         /// Foreldrelokasjonen til denne lokasjonen, brukes for å bygge en hierarkisk struktur av lokasjoner.
