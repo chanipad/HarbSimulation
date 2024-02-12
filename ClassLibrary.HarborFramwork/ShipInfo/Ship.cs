@@ -32,7 +32,7 @@ public class Ship
     /// </summary>
     private ShipCertificate Certificate { get; set; }
 
-    private DateTime dateTime { get; set; }
+    public DateTime dateTime { get; internal set; }
 
     /// <summary>
     /// Gets or sets the type of the ship.
