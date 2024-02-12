@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ClassLibrary.HarborFramework.ShipInfo;
 
 namespace ClassLibrary.HarborFramwork.Utilities
@@ -10,7 +8,7 @@ namespace ClassLibrary.HarborFramwork.Utilities
     public class SingleSailing
     {
         private Dictionary<Ship, DateTime> sailings = new Dictionary<Ship, DateTime>();
-        public List<Ship> sailings = new List<Ship>();
+
 
         /// <summary>
         /// Adds a ship to a single sailing schedule.
@@ -19,7 +17,7 @@ namespace ClassLibrary.HarborFramwork.Utilities
         /// <param name="sailingDate">The date and time of the sailing.</param>
         public void AddSailing(Ship ship, DateTime sailingDate)
         {
-            sailings.Add(new Ship(ship), new sailingDate());
+            sailings.Add(ship, sailingDate);
         }
 
         /// <summary>
@@ -36,9 +34,9 @@ namespace ClassLibrary.HarborFramwork.Utilities
         /// Retrieves a list of all scheduled sailings.
         /// </summary>
         /// <returns>A list of all sailings.</returns>
-        public List<Ship> GetAllSailings()
+        public List<KeyValuePair<Ship, DateTime>> GetAllSailings()
         {
-            return sailings.Keys.ToList();
+            return sailings.ToList();
         }
     }
 }
