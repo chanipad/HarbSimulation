@@ -114,12 +114,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
             /// <param name="newLocation"></param>
             public void AddNewLocation(Location newLocation)
             {
-                Location loc = new()
-                {
-                    location = newLocation,
-                    //Timestamp = DateTime.Now
-                };
-                location.Add(loc);
+                location.Add(newLocation);
             }
 
 

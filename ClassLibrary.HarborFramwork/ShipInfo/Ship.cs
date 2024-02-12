@@ -19,7 +19,7 @@ public class Ship
     /// <summary>
     /// Får typen til skipet.
     /// </summary>
-    private ShipType ShipType { get; set; }
+    public ShipType ShipType { get; private set; }
 
     /// <summary>
     /// Får historikken til skipet.
@@ -27,7 +27,6 @@ public class Ship
     private ShipHistory History { get; set; }
 
 
-    private DateTime dateTime { get; set; }
     /// <summary>
     /// Får sertifikatet til skipet.
     /// </summary>
@@ -36,10 +35,6 @@ public class Ship
 
     public DateTime dateTime { get; internal set; }
 
-    /// <summary>
-    /// Får eller setter typen til skipet.
-    /// </summary>
-    public ShipType Type { get; internal set; }
 
     /// <summary>
     /// Får eller setter en verdi som indikerer om skipet har blitt inspisert.

@@ -1,10 +1,11 @@
 ﻿namespace ClassLibrary.HarborFramework.Utilities
 {
-    public interface ISailingSchedule
+    public interface ISailing
     {
-        void AddSingleSailing(Ship ship, DateTime sailingDate);
+        void AddSingleSailing(Ship ship);
         void AddRecurringSailing(Ship ship, DayOfWeek dayOfWeek);
         void RemoveSailing(Ship ship);
-        List<Ship> GetSailingsOn(DateTime date);
+        List<Ship> GetSailingScheduleBasedOnDay(DateTime date);
+        List<Ship> GetAllSailings();
     }
 }

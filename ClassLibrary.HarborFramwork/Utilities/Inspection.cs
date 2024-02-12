@@ -4,24 +4,31 @@ using System.Collections.Generic;
 
 namespace ClassLibrary.HarborFramework.Utilities
 {
+    /// <summary>
+    /// Administrerer inspeksjoner av skip, inkludert planlegging og gjennomføring av tilfeldige inspeksjoner.
+    /// </summary>
     public class Inspection
     {
-
+        /// <summary>
+        /// Datoen for den planlagte inspeksjonen.
+        /// </summary>
         private DateTime InspectionDate { get; set; }
 
+        /// <summary>
+        /// Skipet som er valgt for inspeksjon.
+        /// </summary>
         private Ship? ShipUpForInspection { get; set; }
 
         /// <summary>
-        /// Schedules a random inspection for one of the ships provided in the list.
+        /// Planlegger en tilfeldig inspeksjon for ett av skipene i listen.
         /// </summary>
-        /// <param name="ships">The list of ships from which one will be randomly selected for inspection.</param>
-        /// <exception cref="ArgumentException">Thrown when the list of ships is null or empty.</exception>
+        /// <param name="ships">Listen over skip hvorav ett vil bli tilfeldig valgt for inspeksjon.</param>
+        /// <exception cref="ArgumentException">Kastes når listen over skip er null eller tom.</exception>
         public void ScheduleRandomInspection(List<Ship> ships)
-
         {
             if (ships == null || ships.Count == 0)
             {
-                throw new ArgumentException("Ship list cannot be null or empty.", nameof(ships));
+                throw new ArgumentException("Listen over skip kan ikke være null eller tom.", nameof(ships));
             }
 
             Random rnd = new Random();
@@ -31,22 +38,22 @@ namespace ClassLibrary.HarborFramework.Utilities
         }
 
         /// <summary>
-        /// Performs an inspection on the ship currently up for inspection.
+        /// Utfører en inspeksjon på skipet som er planlagt for inspeksjon.
         /// </summary>
         public void PerformInspection()
         {
             if (ShipUpForInspection == null)
             {
-                throw new InvalidOperationException("No ship is scheduled for inspection.");
+                throw new InvalidOperationException("Ingen skip er planlagt for inspeksjon.");
             }
 
-            // Simulate the inspection process
-            Console.WriteLine($"Inspecting {ShipUpForInspection.Id} on {InspectionDate.ToShortDateString()}.");
+            // Simulerer inspeksjonsprosessen
+            Console.WriteLine($"Inspekterer {ShipUpForInspection.Id} den {InspectionDate.ToShortDateString()}.");
 
-            // Mark the ship as inspected
+            // Merker skipet som inspisert
             ShipUpForInspection.Inspected = true;
 
-            // Update the inspection date to reflect when the inspection was actually performed
+            // Oppdaterer dato for inspeksjonen for å reflektere når inspeksjonen faktisk ble utført
             InspectionDate = DateTime.Now;
         }
     }
