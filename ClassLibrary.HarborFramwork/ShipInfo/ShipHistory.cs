@@ -1,22 +1,24 @@
-﻿using ClassLibrary.HarborFramework.DockingInfo;
+﻿using System;
+using System.Collections.Generic;
+using ClassLibrary.HarborFramework.DockingInfo;
 
 /// <summary>
-/// Represents the history of a ship, including dockings and loadings.
+/// Representerer historikken til et skip, inkludert dokkinger og lastinger.
 /// </summary>
 public class ShipHistory
 {
     /// <summary>
-    /// Gets or sets the list of dockings associated with the ship.
+    /// Får eller setter listen over dokkinger knyttet til skipet.
     /// </summary>
     private List<Docking> Dockings { get; set; }
 
     /// <summary>
-    /// Gets or sets the list of loadings associated with the ship.
+    /// Får eller setter listen over lastinger knyttet til skipet.
     /// </summary>
     private List<Loading> Loadings { get; set; }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ShipHistory"/> class.
+    /// Initialiserer en ny forekomst av <see cref="ShipHistory"/>-klassen.
     /// </summary>
     public ShipHistory()
     {
@@ -25,38 +27,38 @@ public class ShipHistory
     }
 
     /// <summary>
-    /// Adds a docking record to the ship's history.
+    /// Legger til en dokking i skipets historikk.
     /// </summary>
-    /// <param name="docking">The docking record to add.</param>
+    /// <param name="docking">Dokkingen som skal legges til.</param>
     public void AddDocking(Docking docking)
     {
         Dockings.Add(docking);
     }
 
     /// <summary>
-    /// Adds a loading record to the ship's history.
+    /// Legger til en lasting i skipets historikk.
     /// </summary>
-    /// <param name="loading">The loading record to add.</param>
+    /// <param name="loading">Lastingen som skal legges til.</param>
     public void AddLoading(Loading loading)
     {
         Loadings.Add(loading);
     }
 
     /// <summary>
-    /// Displays the history of dockings and loadings associated with the ship.
+    /// Viser historikken over dokkinger og lastinger knyttet til skipet.
     /// </summary>
     public void DisplayHistory()
     {
-        Console.WriteLine("Docking History:");
+        Console.WriteLine("Dokkinghistorikk:");
         foreach (var docking in Dockings)
         {
-            Console.WriteLine($"Docked at: {docking.dockSpace}, Time: {docking.timestamp}");
+            Console.WriteLine($"Dokket ved: {docking.dockSpace}, Tidspunkt: {docking.timestamp}");
         }
 
-        Console.WriteLine("\nLoading History:");
+        Console.WriteLine("\nLastehistorikk:");
         foreach (var loading in Loadings)
         {
-            Console.WriteLine($"Loaded at: {loading.LoadingPlace}, Time: {loading.Timestamp}");
+            Console.WriteLine($"Lastet ved: {loading.LoadingPlace}, Tidspunkt: {loading.Timestamp}");
         }
     }
 }
