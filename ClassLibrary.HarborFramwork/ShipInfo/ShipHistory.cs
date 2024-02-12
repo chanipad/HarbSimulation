@@ -1,48 +1,62 @@
 ﻿using ClassLibrary.HarborFramework.DockingInfo;
 
-namespace ClassLibrary.HarborFramework.ShipInfo
+/// <summary>
+/// Represents the history of a ship, including dockings and loadings.
+/// </summary>
+public class ShipHistory
 {
     /// <summary>
-    /// Represents the history of a ship, including dockings and loadings.
+    /// Gets or sets the list of dockings associated with the ship.
     /// </summary>
-    public class ShipHistory
+    private List<Docking> Dockings { get; set; }
+
+    /// <summary>
+    /// Gets or sets the list of loadings associated with the ship.
+    /// </summary>
+    private List<Loading> Loadings { get; set; }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ShipHistory"/> class.
+    /// </summary>
+    public ShipHistory()
     {
-        private List<Docking> Dockings { get; set; }
-        private List<Loading> Loadings { get; set; }
+        Dockings = new List<Docking>();
+        Loadings = new List<Loading>();
+    }
 
-        public ShipHistory()
+    /// <summary>
+    /// Adds a docking record to the ship's history.
+    /// </summary>
+    /// <param name="docking">The docking record to add.</param>
+    public void AddDocking(Docking docking)
+    {
+        Dockings.Add(docking);
+    }
+
+    /// <summary>
+    /// Adds a loading record to the ship's history.
+    /// </summary>
+    /// <param name="loading">The loading record to add.</param>
+    public void AddLoading(Loading loading)
+    {
+        Loadings.Add(loading);
+    }
+
+    /// <summary>
+    /// Displays the history of dockings and loadings associated with the ship.
+    /// </summary>
+    public void DisplayHistory()
+    {
+        Console.WriteLine("Docking History:");
+        foreach (var docking in Dockings)
         {
-            Dockings = new List<Docking>();
-            Loadings = new List<Loading>();
+            Console.WriteLine($"Docked at: {docking.dockSpace}, Time: {docking.timestamp}");
         }
 
-        public void AddDocking(Docking docking)
+        Console.WriteLine("\nLoading History:");
+        foreach (var loading in Loadings)
         {
-            Dockings.Add(docking);
+            Console.WriteLine($"Loaded at: {loading.LoadingPlace}, Time: {loading.Timestamp}");
         }
-
-        public void AddLoading(Loading loading)
-        {
-            Loadings.Add(loading);
-        }
-
-        public void DisplayHistory()
-        {
-            Console.WriteLine("Docking History:");
-            foreach (var docking in Dockings)
-            {
-
-                Console.WriteLine($"Docked at: {docking.dockSpace}, Time: {docking.timestamp}");
-
-            }
-
-            Console.WriteLine("\nLoading History:");
-            foreach (var loading in Loadings)
-            {
-                Console.WriteLine($"Loaded at: {loading.LoadingPlace}, Time: {loading.Timestamp}");
-            }
-        }
-
     }
 }
-
