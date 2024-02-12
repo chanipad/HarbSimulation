@@ -15,10 +15,9 @@ namespace HarbSimulation
             
             Ship cargoShip = new Ship(1, ShipType.CARGO_SHIP);
 
-            Ship CRUISE_SHIP = new Ship(2, ShipType.CRUISE_SHIP, new DateTime(2024, 2, 12));
+            Ship CRUISE_SHIP = new Ship(2, ShipType.CRUISE_SHIP, DateTime.Now);
 
 
-            // Opprett en ny dokking ved å bruke konstruktøren som tar imot DockSpace og TimeSlot som parametre
             Docking docking = new Docking(dockSpace: new DockSpace(1),new TimeSlot());
             cargoShip.GetHistory().AddDocking(docking);
 
