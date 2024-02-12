@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ClassLibrary.HarborFramework.DockingInfo;
 using ClassLibrary.HarborFramework.Interfaces;
+using ClassLibrary.HarborFramework.ShipInfo;
 
 namespace ClassLibrary.HarborFramework.ContainerYardInfo
 {
@@ -13,7 +14,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
     /// <summary>
     /// Represent container information.
     /// </summary>
-    public class Container 
+    public class Container : IHarb
     {
         
         private int containerId { get; set; }
@@ -33,7 +34,11 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         }
 
 
+
+        
+
         /*
+
         public void Print()
         {
             Console.WriteLine($"Container ID: {containerId}");
@@ -44,7 +49,10 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
                 {
                     Console.WriteLine($" - Location Dock: {location.dockLocation}");
                     Console.WriteLine($" - Timestamp: {location.Timestamp}");
-                    Console.WriteLine($"   Associated DockSpace Number: {location.DockSpace.DockSpaceNumber}");
+
+                    //Console.WriteLine($"   Associated DockSpace Number: {location.DockSpace.DockSpaceNumber}");
+
+
                 }
             }
             else
@@ -52,6 +60,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
             }
         }
         */
+
 
         public DateTime GetTimestamp()
         {
@@ -66,6 +75,51 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
                 timestamp = DateTime.Now
             };
             location.Add(loc);
+        }
+
+        public void ConfigureHarbor()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ConfigureDockSpace()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ConfigureContainerYard()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetSailingSchedule()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ConfigureShipType()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ShipHistory GetShipHistory(int shipId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ContainerHistory GetContainerHistory(int containerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EvaluateTrafficWeatherSeaConditions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSecurityRegulations()
+        {
+            throw new NotImplementedException();
         }
 
 
