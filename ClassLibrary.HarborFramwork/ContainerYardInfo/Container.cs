@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ClassLibrary.HarborFramework.DockingInfo;
 using ClassLibrary.HarborFramework.Interfaces;
+using ClassLibrary.HarborFramework.ShipInfo;
 
 namespace ClassLibrary.HarborFramework.ContainerYardInfo
 {
@@ -13,11 +14,12 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
     /// <summary>
     /// Represent container information.
     /// </summary>
-    public class Container 
+    public class Container : IHarb
     {
         
         private int containerId { get; set; }
         private List<Location> location { get; set; } = new List<Location>();
+        public DateTime Timestamp { get; private set; }
 
 
         // constructor
@@ -32,17 +34,101 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         }
 
 
+
+        
+
+        /*
+
         public void Print()
         {
-            Console.WriteLine("Container Yard zone: ");
+            Console.WriteLine($"Container ID: {containerId}");
+            Console.WriteLine("Container Locations:");
+            if (location != null)
+            {
+                foreach (var location in location)
+                {
+                    Console.WriteLine($" - Location Dock: {location.dockLocation}");
+                    Console.WriteLine($" - Timestamp: {location.Timestamp}");
+
+                    //Console.WriteLine($"   Associated DockSpace Number: {location.DockSpace.DockSpaceNumber}");
+
+
+                }
+            }
+            else
+            { Console.WriteLine("No locations found.");
+            }
+        }
+        */
+
+
+        public DateTime GetTimestamp()
+        {
+            return DateTime.UtcNow;
+        }
+
+        public void AddNewLocation(Location newLocation, DateTime timestamp)
+        {
+            Location loc = new()
+            {
+                location = newLocation,
+                timestamp = DateTime.Now
+            };
+            location.Add(loc);
+        }
+
+        public void ConfigureHarbor()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ConfigureDockSpace()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ConfigureContainerYard()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetSailingSchedule()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ConfigureShipType()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ShipHistory GetShipHistory(int shipId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ContainerHistory GetContainerHistory(int containerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EvaluateTrafficWeatherSeaConditions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSecurityRegulations()
+        {
+            throw new NotImplementedException();
         }
 
 
 
-    /// <summary>
-    /// Represent container yard zone 
-    /// </summary>
-    public class ContainerYards
+
+        /// <summary>
+        /// Represent container yard zone 
+        /// </summary>
+        public class ContainerYards
         {
             internal object Location;
 
@@ -73,6 +159,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         public class ContainerHistory
         {
             public List<Location> location { get; set; }
+            public DateTime Timestamp { get; private set; }
 
 
             /// <summary>
@@ -84,7 +171,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
                 Location loc = new()
                 {
                     location = newLocation,
-                    Timestamp = DateTime.Now
+                    //Timestamp = DateTime.Now
                 };
                 location.Add(loc);
             }
@@ -98,9 +185,11 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
             {
                 if (location.Count > 0)
                 {
-                    Location loc = new Location();
-                    loc.location = newLocation;
-                    loc.Timestamp = DateTime.Now;
+                    Location loc = new Location
+                    {
+                        location = newLocation,
+                        //Timestamp = DateTime.Now
+                    };
                     location[location.Count - 1] = loc;
                 }
                 else

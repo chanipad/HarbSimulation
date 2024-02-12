@@ -1,52 +1,87 @@
-﻿using ClassLibrary.HarborFramework.ShipInfo;
-using ClassLibrary.HarborFramework.Utilities;
-using ClassLibrary.HarborFramwork.Utilities;
-
-
+﻿using ClassLibrary.HarborFramework.Interfaces;
 namespace ClassLibrary.HarborFramework.Utilities
 {
-    public class SailingSchedule
+    /// <summary>
+    /// Manages both single and recurring sailings for ships.
+    /// </summary>
+    public class SailingSchedule : ISailingSchedule
     {
-        private List<SingleSailing> singleSailings = new List<SingleSailing>();
-        private RecurringSailing recurringSailing = new RecurringSailing();
+        private List<Ship> singleSailings = new List<Ship>();
+        private Dictionary<DayOfWeek, List<Ship>> recurringSailings = new Dictionary<DayOfWeek, List<Ship>>();
 
         /// <summary>
-        /// Retrieves a list of all ships from both single and recurring sailings.
+        /// Initializes a new instance of the <see cref="SailingSchedule"/> class.
         /// </summary>
-        /// <returns>A list of <see cref="Ship"/> objects that are scheduled for either single or recurring sailings.</returns>
-        /// <remarks>
-        /// This method compiles ships from both single sailings and recurring weekly sailings into a single list.
-        /// Ships from recurring sailings are included without duplication, even if they are scheduled on multiple days.
-        /// </remarks>
-        
-        
-        /*
-        public List<Ship> GetAllSailings()
+        public SailingSchedule()
         {
-            var allShips = new List<Ship>();
-
-            // Add ships from single sailings
-            foreach (var singleSailing in singleSailings)
-            {
-                allShips.AddRange(singleSailing.GetAllSailings());
-            }
-
-            // Add ships from recurring sailings without duplication
             foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)))
             {
-                var shipsForDay = recurringSailing.GetShipsForDay(day);
-                foreach (var ship in shipsForDay)
-                {
-                    if (!allShips.Contains(ship))
-                    {
-                        allShips.Add(ship);
-                    }
-                }
+                recurringSailings[day] = new List<Ship>();
+            }
+        }
+
+        /// <summary>
+        /// Adds a ship to the schedule for a single sailing.
+        /// </summary>
+        /// <param name="ship">The ship to be added.</param>
+        /// <param name="sailingDate">The date and time of the sailing.</param>
+        public void AddSingleSailing(Ship ship, DateTime sailingDate)
+        {
+            ship.dateTime = sailingDate;
+            if (!singleSailings.Contains(ship))
+            {
+                singleSailings.Add(ship);
+            }
+        }
+
+        /// <summary>
+        /// Adds a ship to the schedule for recurring sailings on a specific day of the week.
+        /// </summary>
+        /// <param name="ship">The ship to be added.</param>
+        /// <param name="dayOfWeek">The day of the week the ship will sail.</param>
+        public void AddRecurringSailing(Ship ship, DayOfWeek dayOfWeek)
+        {
+            if (!recurringSailings[dayOfWeek].Contains(ship))
+            {
+                recurringSailings[dayOfWeek].Add(ship);
+            }
+        }
+
+        /// <summary>
+        /// Removes a ship from both single and recurring sailing schedules.
+        /// </summary>
+        /// <param name="ship">The ship to be removed.</param>
+        public void RemoveSailing(Ship ship)
+        {
+            // Remove from single sailings
+            singleSailings.Remove(ship);
+
+            // Remove from all recurring sailings
+            foreach (var daySailings in recurringSailings.Values)
+            {
+                daySailings.Remove(ship);
+            }
+        }
+
+        /// <summary>
+        /// Gets a list of ships scheduled to sail on a specified date.
+        /// </summary>
+        /// <param name="date">The date for which to retrieve the sailing schedule.</param>
+        /// <returns>A list of ships scheduled to sail on the specified date.</returns>
+        public List<Ship> GetSailingsOn(DateTime date)
+        {
+            var sailingsOnDate = new List<Ship>();
+
+            // Add single sailings scheduled for the specific date
+            sailingsOnDate.AddRange(singleSailings.Where(ship => ship.dateTime.Date == date.Date));
+
+            // Add recurring sailings for the day of the week
+            if (recurringSailings.ContainsKey(date.DayOfWeek))
+            {
+                sailingsOnDate.AddRange(recurringSailings[date.DayOfWeek]);
             }
 
-            return allShips;
-           }
-        */
-
+            return sailingsOnDate;
+        }
     }
 }
