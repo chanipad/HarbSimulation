@@ -1,52 +1,56 @@
 ﻿using ClassLibrary.HarborFramework.ShipInfo;
-
 using static ClassLibrary.HarborFramework.Enums;
 
 /// <summary>
-/// Represents a ship in the harbor.
+/// Representerer et skip i havnen.
 /// </summary>
 public class Ship
 {
     /// <summary>
-    /// Gets the unique identifier of the ship.
+    /// Får den unike identifikatoren til skipet.
     /// </summary>
     public int Id { get; private set; }
 
     /// <summary>
-    /// Gets or sets the name of the ship.
+    /// Får eller setter navnet på skipet.
     /// </summary>
     public string Name { get; set; }
 
     /// <summary>
-    /// Gets the type of the ship.
+    /// Får typen til skipet.
     /// </summary>
     private ShipType ShipType { get; set; }
 
     /// <summary>
-    /// Gets the history of the ship.
+    /// Får historikken til skipet.
     /// </summary>
     private ShipHistory History { get; set; }
 
+
+    private DateTime dateTime { get; set; }
     /// <summary>
-    /// Gets the certificate of the ship.
+    /// Får sertifikatet til skipet.
     /// </summary>
     private ShipCertificate Certificate { get; set; }
 
+
+    public DateTime dateTime { get; internal set; }
+
     /// <summary>
-    /// Gets or sets the type of the ship.
+    /// Får eller setter typen til skipet.
     /// </summary>
     public ShipType Type { get; internal set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether the ship has been inspected.
+    /// Får eller setter en verdi som indikerer om skipet har blitt inspisert.
     /// </summary>
     public bool Inspected { get; internal set; }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Ship"/> class with the specified ID and ship type.
+    /// Initialiserer en ny instans av <see cref="Ship"/>-klassen med den spesifiserte ID-en og skiptypen.
     /// </summary>
-    /// <param name="id">The unique identifier of the ship.</param>
-    /// <param name="shipType">The type of the ship.</param>
+    /// <param name="id">Den unike identifikatoren til skipet.</param>
+    /// <param name="shipType">Typen til skipet.</param>
     public Ship(int id, ShipType shipType)
     {
         Id = id;
@@ -56,9 +60,24 @@ public class Ship
     }
 
     /// <summary>
-    /// Gets the history of the ship.
+    /// Initialiserer en ny instans av <see cref="Ship"/>-klassen med den spesifiserte ID-en, skiptypen og dato/tid.
     /// </summary>
-    /// <returns>The history of the ship.</returns>
+    /// <param name="id">Den unike identifikatoren til skipet.</param>
+    /// <param name="shipType">Typen til skipet.</param>
+    /// <param name="dateTime">Dato/tid for skipet.</param>
+    public Ship(int id, ShipType shipType, DateTime dateTime)
+    {
+        Id = id;
+        ShipType = shipType;
+        History = new ShipHistory();
+        Certificate = new ShipCertificate();
+        this.dateTime = dateTime;
+    }
+
+    /// <summary>
+    /// Henter historikken til skipet.
+    /// </summary>
+    /// <returns>Historikken til skipet.</returns>
     public ShipHistory GetHistory()
     {
         return History;

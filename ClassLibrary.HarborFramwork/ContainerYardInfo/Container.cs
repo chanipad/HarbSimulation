@@ -34,7 +34,11 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         }
 
 
+
         
+
+        /*
+
         public void Print()
         {
             Console.WriteLine($"Container ID: {containerId}");
@@ -45,14 +49,18 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
                 {
                     Console.WriteLine($" - Location Dock: {location.dockLocation}");
                     Console.WriteLine($" - Timestamp: {location.Timestamp}");
+
                     //Console.WriteLine($"   Associated DockSpace Number: {location.DockSpace.DockSpaceNumber}");
+
+
                 }
             }
             else
             { Console.WriteLine("No locations found.");
             }
         }
-        
+        */
+
 
         public DateTime GetTimestamp()
         {
