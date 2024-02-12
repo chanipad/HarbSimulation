@@ -34,6 +34,8 @@ public class Ship
     private ShipCertificate Certificate { get; set; }
 
 
+    public DateTime dateTime { get; internal set; }
+
     /// <summary>
     /// Får eller setter typen til skipet.
     /// </summary>
