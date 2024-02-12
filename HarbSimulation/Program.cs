@@ -73,7 +73,7 @@ namespace HarbSimulation
             container1.AddNewLocation(new Location("Location 3", DateTime.Now, dockSpace), container1.GetTimestamp());
 
             // Skriv ut informasjon om beholderen
-            //container1.Print();
+            container1.Print();
           
          
             // Skriv ut informasjon om lokasjonen
