@@ -32,6 +32,8 @@ public class Ship
     /// </summary>
     private ShipCertificate Certificate { get; set; }
 
+    private DateTime dateTime { get; set; }
+
     /// <summary>
     /// Gets or sets the type of the ship.
     /// </summary>
@@ -53,6 +55,15 @@ public class Ship
         ShipType = shipType;
         History = new ShipHistory();
         Certificate = new ShipCertificate();
+    }
+
+    public Ship(int id, ShipType shipType, DateTime dateTime)
+    {
+        Id = id;
+        ShipType = shipType;
+        History = new ShipHistory();
+        Certificate = new ShipCertificate();
+        this.dateTime = dateTime;
     }
 
     /// <summary>
