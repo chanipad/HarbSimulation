@@ -18,6 +18,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         
         private int containerId { get; set; }
         private List<Location> location { get; set; } = new List<Location>();
+        public DateTime Timestamp { get; private set; }
 
 
         // constructor
@@ -32,17 +33,48 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         }
 
 
+        /*
         public void Print()
         {
-            Console.WriteLine("Container Yard zone: ");
+            Console.WriteLine($"Container ID: {containerId}");
+            Console.WriteLine("Container Locations:");
+            if (location != null)
+            {
+                foreach (var location in location)
+                {
+                    Console.WriteLine($" - Location Dock: {location.dockLocation}");
+                    Console.WriteLine($" - Timestamp: {location.Timestamp}");
+                    Console.WriteLine($"   Associated DockSpace Number: {location.DockSpace.DockSpaceNumber}");
+                }
+            }
+            else
+            { Console.WriteLine("No locations found.");
+            }
+        }
+        */
+
+        public DateTime GetTimestamp()
+        {
+            return DateTime.UtcNow;
+        }
+
+        public void AddNewLocation(Location newLocation, DateTime timestamp)
+        {
+            Location loc = new()
+            {
+                location = newLocation,
+                timestamp = DateTime.Now
+            };
+            location.Add(loc);
         }
 
 
 
-    /// <summary>
-    /// Represent container yard zone 
-    /// </summary>
-    public class ContainerYards
+
+        /// <summary>
+        /// Represent container yard zone 
+        /// </summary>
+        public class ContainerYards
         {
             internal object Location;
 
@@ -73,6 +105,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         public class ContainerHistory
         {
             public List<Location> location { get; set; }
+            public DateTime Timestamp { get; private set; }
 
 
             /// <summary>
@@ -84,7 +117,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
                 Location loc = new()
                 {
                     location = newLocation,
-                    Timestamp = DateTime.Now
+                    //Timestamp = DateTime.Now
                 };
                 location.Add(loc);
             }
@@ -98,9 +131,11 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
             {
                 if (location.Count > 0)
                 {
-                    Location loc = new Location();
-                    loc.location = newLocation;
-                    loc.Timestamp = DateTime.Now;
+                    Location loc = new Location
+                    {
+                        location = newLocation,
+                        //Timestamp = DateTime.Now
+                    };
                     location[location.Count - 1] = loc;
                 }
                 else
