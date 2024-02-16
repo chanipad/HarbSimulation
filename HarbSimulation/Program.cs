@@ -66,11 +66,11 @@ namespace HarbSimulation
             dockSpace1.ConfigureDockSpace(DockSpaceType.CRUISE, new List<ShipType> { ShipType.CRUISE_SHIP });
 
             // Registrerer ankomst og avgang for skipet ved å benytte de nye direkte metodene
-            boat.AddArrival(dockSpace1, new DateTime(2024, 2, 1, 12, 0, 0));
             boat.AddDeparture(dockSpace1, new DateTime(2024, 2, 1, 18, 0, 0));
+            boat.AddArrival(dockSpace1, new DateTime(2024, 2, 1, 12, 0, 0));
 
             // Henter og viser hendelseshistorikken for skipet
-            Console.WriteLine(boat.GetHistory());
+           boat.GetHistory();
         }
     }
 }
