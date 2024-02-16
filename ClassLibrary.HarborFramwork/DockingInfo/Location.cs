@@ -1,27 +1,10 @@
-﻿using ClassLibrary.HarborFramework.Interfaces;
-using ClassLibrary.HarborFramework.Utilities;
-
-namespace ClassLibrary.HarborFramework.DockingInfo
+﻿namespace ClassLibrary.HarborFramework.DockingInfo
 {
     /// <summary>
-    /// Representerer en lokasjon med tilknytning til en spesifikk dokkplass og tidspunkt.
+    /// Representerer en lokasjon med tilknytning til en spesifikk dokkplass og et tidspunkt.
     /// </summary>
-    public class Location:ILocation
+    public class Location
     {
-        /// <summary>
-        /// Foreldrelokasjonen til denne lokasjonen, brukes for å bygge en hierarkisk struktur av lokasjoner.
-        /// </summary>
-        private Location parentLocation;
-
-        // Denne egenskapen ser ut til å være internt brukt og dens formål er uklart uten kontekst.
-        internal object dockLocation;
-
-        /// <summary>
-        /// Tidspunktet for når en hendelse skjer ved denne lokasjonen.
-        /// </summary>
-        internal DateTime timestamp;
-        internal Location location;
-
         /// <summary>
         /// Identifikatoren for dokkplassen assosiert med denne lokasjonen.
         /// </summary>
@@ -38,32 +21,29 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         public DockSpace DockSpace { get; private set; }
 
         /// <summary>
-        /// En ny identifikator for lokasjonen, potensielt for å beskrive en ny eller endret posisjon.
-        /// </summary>
-        public string NewLocation { get; private set; }
-
-        /// <summary>
         /// Initialiserer en ny instans av Location-klassen med en dokkplass, tidspunkt, og dokkplassobjekt.
         /// </summary>
         /// <param name="dockLocation">Identifikatoren for dokkplassen.</param>
-        /// <param name="timeSlot">Tidspunktet for lokasjonen.</param>
+        /// <param name="timestamp">Tidspunktet for lokasjonen.</param>
         /// <param name="dockSpace">Dokkplassobjektet assosiert med lokasjonen.</param>
-        public Location(string dockLocation, DateTime timeSlot, DockSpace dockSpace)
+        public Location(string dockLocation, DateTime timestamp, DockSpace dockSpace)
         {
             DockLocation = dockLocation;
-            Timestamp = timeSlot;
+            Timestamp = timestamp;
             DockSpace = dockSpace;
         }
 
         /// <summary>
-        /// Initialiserer en ny instans av Location-klassen med en ny lokasjon og tidspunkt.
+        /// Initialiserer en ny instans av Location-klassen med en dokkplass og tidspunkt, uten et eksplisitt dokkplassobjekt.
+        /// Dette kan være nyttig for tilfeller hvor detaljert dokkplassinformasjon ikke er nødvendig eller tilgjengelig.
         /// </summary>
-        /// <param name="newLocation">Den nye identifikatoren for lokasjonen.</param>
+        /// <param name="dockLocation">Identifikatoren for dokkplassen.</param>
         /// <param name="timestamp">Tidspunktet for lokasjonen.</param>
-        public Location(string newLocation, DateTime timestamp)
+        public Location(string dockLocation, DateTime timestamp)
         {
-            NewLocation = newLocation;
-            this.timestamp = timestamp;
+            DockLocation = dockLocation;
+            Timestamp = timestamp;
+            DockSpace = null;
         }
 
         /// <summary>
@@ -71,27 +51,6 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         /// </summary>
         public Location()
         {
-        }
-
-        /// <summary>
-        /// Initialiserer en ny instans av Location-klassen med en dokkplass, tidspunkt, og en foreldrelokasjon.
-        /// </summary>
-        /// <param name="dockLocation">Identifikatoren for dokkplassen.</param>
-        /// <param name="timestamp">Tidspunktet for lokasjonen.</param>
-        /// <param name="parentLocation">Foreldrelokasjonen for hierarkisk strukturering.</param>
-        public Location(string dockLocation, DateTime timestamp, Location parentLocation)
-        : this(dockLocation, timestamp)
-        {
-            this.parentLocation = parentLocation;
-        }
-
-        /// <summary>
-        /// Gjør det mulig å implicit konvertere en streng til en Location-instans. Implementasjonen er ikke fullført.
-        /// </summary>
-        /// <param name="newLocation">Strengen som representerer den nye lokasjonen.</param>
-        public static implicit operator Location(string newLocation)
-        {
-            throw new NotImplementedException();
         }
     }
 }

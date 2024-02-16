@@ -18,7 +18,7 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         /// <summary>
         /// Får containergården hvor lastingen finner sted.
         /// </summary>
-        public ContainerYards ContainerYards { get; private set; }
+        public ContainerYard ContainerYards { get; private set; }
 
         /// <summary>
         /// Får tidspunktet for når lasteoperasjonen er planlagt.
@@ -30,7 +30,7 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         /// </summary>
         /// <param name="containerYards">Containergården hvor lastingen finner sted.</param>
         /// <param name="timeSlot">Tidspunktet for når lasteoperasjonen er planlagt.</param>
-        public Loading(ContainerYards containerYards, TimeSlot timeSlot)
+        public Loading(ContainerYard containerYards, TimeSlot timeSlot)
         {
             ContainerYards = containerYards;
             Timestamp = timeSlot;

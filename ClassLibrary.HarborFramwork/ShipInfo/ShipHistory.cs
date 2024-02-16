@@ -13,7 +13,7 @@ public class ShipHistory
     /// Får eller setter listen over dokkinger knyttet til skipet.
     /// </summary>
     private List<Docking> Dockings { get; set; }
-    private List<ShipEvent> Events { get; set; } = new List<ShipEvent>();
+    public List<ShipEvent> Events { get; private set; } = new List<ShipEvent>();
 
 
     /// <summary>
@@ -84,17 +84,5 @@ public class ShipHistory
     public void AddDeparture(DockSpace dockSpace, DateTime departureTime)
     {
         Events.Add(new ShipEvent(departureTime, dockSpace, Enums.EventType.Departure));
-    }
-
-    /// <summary>
-    /// Viser en kronologisk historikk av alle ankomster og avganger.
-    /// </summary>
-    public void DisplayEventHistory()
-    {
-        foreach (var shipEvent in Events.OrderBy(e => e.EventTime))
-        {
-            string eventType = shipEvent.Type == Enums.EventType.Arrival ? "Ankomst" : "Avgang";
-            Console.WriteLine($"{eventType} ved DockSpace {shipEvent.DockSpace.DockSpaceNumber} - Tid: {shipEvent.EventTime}");
-        }
     }
 }
