@@ -35,7 +35,7 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         /// <returns>Sant hvis noen av dokkene er tilgjengelige for skiptypen, ellers usant.</returns>
         public bool IsLocationAvailable(List<DockSpace> dockSpaces, ShipType shipType)
         {
-            return dockSpaces.Any(d => d.DockSpaceNumber == LocationNumber && !d.ScheduledShips.Any(s => s.Ship.Type == shipType));
+            return dockSpaces.Any(d => d.DockSpaceNumber == LocationNumber && !d.ScheduledShips.Any(s => s.Ship.ShipType == shipType));
         }
     }
 }

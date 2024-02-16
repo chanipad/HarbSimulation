@@ -8,6 +8,10 @@ namespace ClassLibrary.HarborFramework
 {
     public class Enums
     {
+        public enum EventType { 
+            Arrival,
+            Departure
+        }
         public enum ContainerYardType
         {
             STANDARD,
