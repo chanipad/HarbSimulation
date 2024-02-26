@@ -56,15 +56,15 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         /// Planlegger et skip for dokking hvis skipstypen er tillatt.
         /// </summary>
         /// <param name="ship">Skipet som skal planlegges for dokking.</param>
-        /// <param name="timeSlot">Tidspunktet for dokking.</param>
+        /// <param name="dockingDateTime">Tidspunktet for dokking.</param>
         /// <returns>True hvis skipet ble planlagt, ellers false.</returns>
-        public bool ScheduleShip(Ship ship, TimeSlot timeSlot)
+        public bool ScheduleShip(Ship ship, DateTime dockingDateTime)
         {
             if (!AllowedShipTypes.Contains(ship.ShipType))
             {
                 return false;
             }
-            ScheduledShips.Add(new ScheduledShip { Ship = ship, TimeSlot = timeSlot });
+            ScheduledShips.Add(new ScheduledShip { Ship = ship, DockingDateTime = dockingDateTime });
             return true;
         }
     }
@@ -83,7 +83,7 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         /// <summary>
         /// Får eller setter tidspunktet for når skipet er planlagt for dokking.
         /// </summary>
-        public TimeSlot TimeSlot { get; set; }
+        public DateTime DockingDateTime { get; set; }
     }
 
 }
