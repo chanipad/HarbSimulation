@@ -1,4 +1,6 @@
-﻿namespace ClassLibrary.HarborFramework.ContainerYardInfo
+﻿using ClassLibrary.HarborFramwork.Exceptions;
+
+namespace ClassLibrary.HarborFramework.ContainerYardInfo
 {
     /// <summary>
     /// Representerer et containerområde med funksjonalitet for å administrere containere og planlegge lasteoperasjoner.
@@ -37,7 +39,14 @@
         /// <param name="container">Containeren som skal legges til.</param>
         public void AddContainer(Container container)
         {
-            Containers.Add(container);
+            try
+            {
+                Containers.Add(container);
+            }
+            catch (Exception ex)
+            {
+                throw new ContainerException("Fail to add new container to yard.", ex);
+            }
         }
 
         /// <summary>
