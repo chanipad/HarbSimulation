@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ClassLibrary.HarborFramework.DockingInfo;
 using ClassLibrary.HarborFramework.Interfaces;
+using ClassLibrary.HarborFramwork.Exceptions;
 
 namespace ClassLibrary.HarborFramework.ContainerYardInfo
 {
@@ -35,7 +36,15 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         /// <param name="newLocation">Den nye lokasjonen å legge til.</param>
         public void AddNewLocation(Location newLocation)
         {
-            Locations.Add(newLocation);
+            try
+            {
+                Locations.Add(newLocation);
+            }
+            catch (Exception ex)
+            {
+                throw new ContainerException("Fail to add new location.", ex);
+            }
+            
         }
 
         /// <summary>
@@ -48,11 +57,24 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         /// <returns>En liste av <see cref="Location"/> objekter som representerer containerens historikk.</returns>
         public List<Location> GetContainerHistory()
         {
+            if (Locations == null)
+            {
+                throw new ContainerException("The locations list is not initialzed.");
+            }
+
             List<Location> historyCopy = new List<Location>(Locations);
 
-            foreach (var location in historyCopy)
+            try
             {
-                Console.WriteLine($"Location: {location.DockLocation}, Timestamp: {location.Timestamp}");
+                foreach (var location in historyCopy)
+                {
+                    Console.WriteLine($"Location: {location.DockLocation}, Timestamp: {location.Timestamp}");
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw new ContainerException("An error occurred while retrieving container history", ex);
             }
 
             return historyCopy;
