@@ -8,7 +8,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
     /// <summary>
     /// Representerer informasjon om en container og dens historikk.
     /// </summary>
-    public class Container : IHarb // Antar at IHarb er et grensesnitt som eksisterer i prosjektet
+    public class Container : IContainer
     {
         /// <summary>
         /// Får containerens ID.
@@ -57,16 +57,5 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
 
             return historyCopy;
         }
-
-
-        // Implementasjon av IHarb grensesnittmetoder (antar at disse er del av IHarb)
-        public void ConfigureHarbor() { throw new NotImplementedException(); }
-        public void ConfigureDockSpace() { throw new NotImplementedException(); }
-        public void ConfigureContainerYard() { throw new NotImplementedException(); }
-        public void SetSailingSchedule() { throw new NotImplementedException(); }
-        public void ConfigureShipType() { throw new NotImplementedException(); }
-        public ShipHistory GetShipHistory(int shipId) { throw new NotImplementedException(); }
-        public void EvaluateTrafficWeatherSeaConditions() { throw new NotImplementedException(); }
-        public void HandleSecurityRegulations() { throw new NotImplementedException(); }
     }
 }
