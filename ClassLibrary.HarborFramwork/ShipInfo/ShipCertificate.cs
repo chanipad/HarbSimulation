@@ -1,36 +1,38 @@
 ﻿namespace ClassLibrary.HarborFramework.ShipInfo
 {
     /// <summary>
-    /// Represents the certificate information of a ship.
+    /// Representerer informasjon om et skips sertifikat.
     /// </summary>
     public class ShipCertificate
     {
         /// <summary>
-        /// Gets or sets the unique identifier of the certificate.
+        /// Får eller setter den unike identifikatoren til sertifikatet.
         /// </summary>
         public int CertificateID { get; set; }
 
         /// <summary>
-        /// Gets or sets the expiration date of the certificate.
+        /// Får eller setter utløpsdatoen for sertifikatet.
         /// </summary>
         public DateTime ExpirationDate { get; set; }
 
         /// <summary>
-        /// Gets or sets a flag indicating whether the ship has access control clearance.
+        /// Får eller setter en indikator på om skipet har klarering for tilgangskontroll.
         /// </summary>
         public bool HasAccessControlClearance { get; set; }
 
         /// <summary>
-        /// Gets or sets a flag indicating whether the inspection of cargo and ship supplies has been performed.
+        /// Får eller setter en indikator på om inspeksjon av last og skipsforsyninger har blitt utført.
         /// </summary>
         public bool IsInspectionPerformed { get; set; }
 
         /// <summary>
-        /// Validates the ship certificate.
+        /// Validerer skipsertifikatet.
         /// </summary>
+        /// <param name="certificate">Sertifikatet som skal valideres.</param>
+        /// <returns>Sann hvis sertifikatet er gyldig, ellers usann.</returns>
         public static bool ValidateCertificate(ShipCertificate certificate)
         {
-            // This check if the certificate is expired
+            // Denne sjekken ser om sertifikatet er utløpt
             if (certificate.ExpirationDate <= DateTime.Now)
             {
                 return false;

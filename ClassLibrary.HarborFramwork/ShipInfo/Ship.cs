@@ -1,4 +1,8 @@
-﻿using ClassLibrary.HarborFramework.ShipInfo;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using ClassLibrary.HarborFramework.DockingInfo;
+using ClassLibrary.HarborFramework.ShipInfo;
 using static ClassLibrary.HarborFramework.Enums;
 
 /// <summary>
@@ -19,27 +23,15 @@ public class Ship
     /// <summary>
     /// Får typen til skipet.
     /// </summary>
-    private ShipType ShipType { get; set; }
+    public ShipType ShipType { get; private set; }
 
-    /// <summary>
-    /// Får historikken til skipet.
-    /// </summary>
     private ShipHistory History { get; set; }
-
-
-    private DateTime dateTime { get; set; }
-    /// <summary>
-    /// Får sertifikatet til skipet.
-    /// </summary>
     private ShipCertificate Certificate { get; set; }
 
-
-    public DateTime dateTime { get; internal set; }
-
     /// <summary>
-    /// Får eller setter typen til skipet.
+    /// Får eller setter datoen og tiden for skipet. Brukes for demonstrasjonsformål.
     /// </summary>
-    public ShipType Type { get; internal set; }
+    public DateTime dateTime { get; internal set; }
 
     /// <summary>
     /// Får eller setter en verdi som indikerer om skipet har blitt inspisert.
@@ -47,7 +39,7 @@ public class Ship
     public bool Inspected { get; internal set; }
 
     /// <summary>
-    /// Initialiserer en ny instans av <see cref="Ship"/>-klassen med den spesifiserte ID-en og skiptypen.
+    /// Initialiserer en ny instans av <see cref="Ship"/>-klassen med spesifisert ID og skiptype.
     /// </summary>
     /// <param name="id">Den unike identifikatoren til skipet.</param>
     /// <param name="shipType">Typen til skipet.</param>
@@ -57,29 +49,44 @@ public class Ship
         ShipType = shipType;
         History = new ShipHistory();
         Certificate = new ShipCertificate();
+        dateTime = DateTime.Now; // Setter en standardverdi for demonstrasjon
     }
 
     /// <summary>
-    /// Initialiserer en ny instans av <see cref="Ship"/>-klassen med den spesifiserte ID-en, skiptypen og dato/tid.
+    /// Registrerer en ankomst for skipet ved en spesifisert DockSpace og tidspunkt.
     /// </summary>
-    /// <param name="id">Den unike identifikatoren til skipet.</param>
-    /// <param name="shipType">Typen til skipet.</param>
-    /// <param name="dateTime">Dato/tid for skipet.</param>
-    public Ship(int id, ShipType shipType, DateTime dateTime)
+    /// <param name="dockSpace">DockSpace hvor ankomsten skjedde.</param>
+    /// <param name="arrivalTime">Tidspunktet for ankomsten.</param>
+    public void AddArrival(DockSpace dockSpace, DateTime arrivalTime)
     {
-        Id = id;
-        ShipType = shipType;
-        History = new ShipHistory();
-        Certificate = new ShipCertificate();
-        this.dateTime = dateTime;
+        History.AddArrival(dockSpace, arrivalTime);
     }
 
     /// <summary>
-    /// Henter historikken til skipet.
+    /// Registrerer en avgang for skipet fra en spesifisert DockSpace og tidspunkt.
     /// </summary>
-    /// <returns>Historikken til skipet.</returns>
-    public ShipHistory GetHistory()
+    /// <param name="dockSpace">DockSpace hvor avgangen skjedde.</param>
+    /// <param name="departureTime">Tidspunktet for avgangen.</param>
+    public void AddDeparture(DockSpace dockSpace, DateTime departureTime)
     {
-        return History;
+        History.AddDeparture(dockSpace, departureTime);
+    }
+
+    /// <summary>
+    /// Henter historikken til skipet som en streng.
+    /// </summary>
+    /// <returns>En streng som representerer historikken til skipet med alle registrerte ankomster og avganger.</returns>
+    public void GetHistory()
+    {
+        var eventHistory = new System.Text.StringBuilder();
+        eventHistory.AppendLine("Hendelseshistorikk:");
+
+        foreach (var shipEvent in History.Events.OrderBy(e => e.EventTime))
+        {
+            string eventType = shipEvent.Type == EventType.Arrival ? "Ankomst" : "Avgang";
+            eventHistory.AppendLine($"{eventType} ved DockSpace {shipEvent.DockSpace.DockSpaceNumber} - Tid: {shipEvent.EventTime}");
+        }
+
+        Console.WriteLine(eventHistory);
     }
 }

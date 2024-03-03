@@ -1,4 +1,5 @@
 ﻿using ClassLibrary.HarborFramework.ContainerYardInfo;
+using ClassLibrary.HarborFramework.DockingInfo;
 using ClassLibrary.HarborFramework.ShipInfo;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace ClassLibrary.HarborFramework.Interfaces
         void SetSailingSchedule();
         void ConfigureShipType();
         ShipHistory GetShipHistory(int shipId);
-        ContainerHistory GetContainerHistory(int containerId);
+        public List<Location> GetContainerHistory();
         void EvaluateTrafficWeatherSeaConditions();
         void HandleSecurityRegulations();
 

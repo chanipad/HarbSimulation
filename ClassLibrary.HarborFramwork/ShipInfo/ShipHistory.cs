@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using ClassLibrary.HarborFramework;
 using ClassLibrary.HarborFramework.DockingInfo;
+using ClassLibrary.HarborFramework.ShipInfo;
 
 /// <summary>
 /// Representerer historikken til et skip, inkludert dokkinger og lastinger.
@@ -11,6 +13,8 @@ public class ShipHistory
     /// Får eller setter listen over dokkinger knyttet til skipet.
     /// </summary>
     private List<Docking> Dockings { get; set; }
+    public List<ShipEvent> Events { get; private set; } = new List<ShipEvent>();
+
 
     /// <summary>
     /// Får eller setter listen over lastinger knyttet til skipet.
@@ -47,7 +51,7 @@ public class ShipHistory
     /// <summary>
     /// Viser historikken over dokkinger og lastinger knyttet til skipet.
     /// </summary>
-    public void DisplayHistory()
+    public void DisplayDockingHistory()
     {
         Console.WriteLine("Dokkinghistorikk:");
         foreach (var docking in Dockings)
@@ -60,5 +64,25 @@ public class ShipHistory
         {
             Console.WriteLine($"Lastet ved: {loading.LoadingPlace}, Tidspunkt: {loading.Timestamp}");
         }
+    }
+
+    /// <summary>
+    /// Registrerer en ankomst ved en spesifikk DockSpace og tidspunkt.
+    /// </summary>
+    /// <param name="dockSpace">DockSpace hvor ankomsten skjedde.</param>
+    /// <param name="arrivalTime">Tidspunktet for ankomsten.</param>
+    public void AddArrival(DockSpace dockSpace, DateTime arrivalTime)
+    {
+        Events.Add(new ShipEvent(arrivalTime, dockSpace, Enums.EventType.Arrival));
+    }
+
+    /// <summary>
+    /// Registrerer en avgang fra en spesifikk DockSpace og tidspunkt.
+    /// </summary>
+    /// <param name="dockSpace">DockSpace hvor avgangen skjedde.</param>
+    /// <param name="departureTime">Tidspunktet for avgangen.</param>
+    public void AddDeparture(DockSpace dockSpace, DateTime departureTime)
+    {
+        Events.Add(new ShipEvent(departureTime, dockSpace, Enums.EventType.Departure));
     }
 }

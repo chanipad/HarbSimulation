@@ -2,6 +2,7 @@
 using ClassLibrary.HarborFramework.ContainerYardInfo;
 using ClassLibrary.HarborFramework.DockingInfo;
 using ClassLibrary.HarborFramework.ShipInfo;
+using ClassLibrary.HarborFramework.Utilities;
 using static ClassLibrary.HarborFramework.ContainerYardInfo.Container;
 using static ClassLibrary.HarborFramework.Enums;
 
@@ -11,81 +12,65 @@ namespace HarbSimulation
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to the Harbor Simulation!");
+            /*
+            // bruker test1
+            // Opprett container med en unik ID
+            var container = new Container(1);
 
-            
-            Ship cargoShip = new Ship(1, ShipType.CARGO_SHIP);
+            // Legg til noen lokasjoner i containerens historikk
+            container.AddNewLocation(new Location("Dock C", DateTime.Now));
+            container.AddNewLocation(new Location("Dock A", DateTime.Now.AddDays(1)));
+            container.AddNewLocation(new Location("Dock B", DateTime.Now.AddDays(2)));
 
-            Ship CRUISE_SHIP = new Ship(2, ShipType.CRUISE_SHIP, DateTime.Now);
+            // Hent og skriv ut containerens historikk til konsollen
+            Console.WriteLine("Henter containerhistorikk og skriver ut til konsollen:");
+            container.GetContainerHistory();
+            */
+            /*
+            // bruker test2
+            // Lag et dockspace
+            var dockSpace = new DockSpace(1);
 
+            // Konfigurer en DockSpace
+            dockSpace.ConfigureDockSpace(DockSpaceType.CARGO, new List<ShipType> { ShipType.CARGO_SHIP });
 
-            Docking docking = new Docking(dockSpace: new DockSpace(1),new TimeSlot());
-            cargoShip.GetHistory().AddDocking(docking);
+            // Opprett et skip
+            var ship = new Ship(1, ShipType.CARGO_SHIP);
 
-            Loading loading = new Loading(containerYards: new ContainerYards(), new TimeSlot());
-            cargoShip.GetHistory().AddLoading(loading);
-
-
-            ShipCertificate certificate = new ShipCertificate
+            // Planlegg dokking
+            var docking = new Docking(dockSpace, new TimeSlot { startTime = DateTime.Now, endTime = DateTime.Now.AddHours(2) });
+            docking.ScheduleDocking(ship);
+            */
+            /*
+            //bruker test3
+            // Liste med skip
+            var ships = new List<Ship>
             {
-                CertificateID = 544,
-                ExpirationDate = DateTime.Now.AddDays(15),
-                HasAccessControlClearance = true,
-                IsInspectionPerformed = true
+                new Ship(2, ShipType.CRUISE_SHIP),
+                new Ship(3, ShipType.LEISURE_BOAT)
             };
 
-            
-            bool isValid = ShipCertificate.ValidateCertificate(certificate);
-
-            
-            Console.WriteLine($"This Certificate is valid: {isValid}");
-
-      
-            cargoShip.GetHistory().DisplayHistory();
-
-
-
-
-
-            /* / Opprett en ny beholder med en ID
-            Container container1 = new Container(1);
-
-            // Legg til noen steder i beholderen
-            container1.AddNewLocation(new Location(1, DateTime.Now));
-            
-            // Skriv ut informasjon om beholderen
-            container1.Print();
+            // Planlegg en tilfeldig inspeksjon av en liste med båter
+            var inspection = new Inspection();
+            inspection.ScheduleRandomInspection(ships);
+            // utfør en tilfeldig inspeksjon
+            inspection.PerformInspection();
             */
-            // Opprett en ny dokkrom med et nummer
-            DockSpace dockSpace = new DockSpace(1);
 
-            // Opprett en ny lokasjon og koble den til dokkrommet
-            Location location = new Location("Dock 1", DateTime.Now, dockSpace);
+            //bruker test4
+            // Initialiserer skipet med unik ID og skiptype
+            Ship boat = new Ship(1, ShipType.CRUISE_SHIP);
 
-            // Opprett en ny beholder med en ID
-            Container container1 = new Container(1);
+            // Definerer en dokkplass som kan håndtere cruisefartøy
+            DockSpace dockSpace1 = new DockSpace(101);
+            dockSpace1.ConfigureDockSpace(DockSpaceType.CRUISE, new List<ShipType> { ShipType.CRUISE_SHIP });
 
-            // Legg til noen steder i beholderen
-            container1.AddNewLocation(new Location("Location 1", DateTime.Now, dockSpace),
+            // Registrerer ankomst og avgang for skipet ved å benytte de nye direkte metodene
+            boat.AddDeparture(dockSpace1, new DateTime(2024, 2, 1, 18, 0, 0));
+            boat.AddArrival(dockSpace1, new DateTime(2024, 2, 1, 12, 0, 0));
 
-            // Legg til noen steder i beholderen
-            container1.GetTimestamp());
-            container1.AddNewLocation(new Location("Location 2", DateTime.Now, dockSpace), container1.GetTimestamp());
-            container1.AddNewLocation(new Location("Location 3", DateTime.Now, dockSpace), container1.GetTimestamp());
-
-            // Skriv ut informasjon om beholderen
-
-
-            //container1.Print();
-          
-         
-            // Skriv ut informasjon om lokasjonen
-            Console.WriteLine($"Location Dock: {location.DockLocation}");
-            Console.WriteLine($"Timestamp: {location.Timestamp}");
-            Console.WriteLine($"Associated DockSpace Number: {location.DockSpace.DockSpaceNumber}");
-           
-            
-
+            // Henter og viser hendelseshistorikken for skipet
+           boat.GetHistory();
         }
     }
 }
