@@ -1,48 +1,88 @@
-﻿using ClassLibrary.HarborFramework.DockingInfo;
+﻿using System;
+using System.Collections.Generic;
+using ClassLibrary.HarborFramework;
+using ClassLibrary.HarborFramework.DockingInfo;
+using ClassLibrary.HarborFramework.ShipInfo;
 
-namespace ClassLibrary.HarborFramework.ShipInfo
+/// <summary>
+/// Representerer historikken til et skip, inkludert dokkinger og lastinger.
+/// </summary>
+public class ShipHistory
 {
     /// <summary>
-    /// Represents the history of a ship, including dockings and loadings.
+    /// Får eller setter listen over dokkinger knyttet til skipet.
     /// </summary>
-    public class ShipHistory
+    private List<Docking> Dockings { get; set; }
+    public List<ShipEvent> Events { get; private set; } = new List<ShipEvent>();
+
+
+    /// <summary>
+    /// Får eller setter listen over lastinger knyttet til skipet.
+    /// </summary>
+    private List<Loading> Loadings { get; set; }
+
+    /// <summary>
+    /// Initialiserer en ny forekomst av <see cref="ShipHistory"/>-klassen.
+    /// </summary>
+    public ShipHistory()
     {
-        private List<Docking> Dockings { get; set; }
-        private List<Loading> Loadings { get; set; }
+        Dockings = new List<Docking>();
+        Loadings = new List<Loading>();
+    }
 
-        public ShipHistory()
+    /// <summary>
+    /// Legger til en dokking i skipets historikk.
+    /// </summary>
+    /// <param name="docking">Dokkingen som skal legges til.</param>
+    public void AddDocking(Docking docking)
+    {
+        Dockings.Add(docking);
+    }
+
+    /// <summary>
+    /// Legger til en lasting i skipets historikk.
+    /// </summary>
+    /// <param name="loading">Lastingen som skal legges til.</param>
+    public void AddLoading(Loading loading)
+    {
+        Loadings.Add(loading);
+    }
+
+    /// <summary>
+    /// Viser historikken over dokkinger og lastinger knyttet til skipet.
+    /// </summary>
+    public void DisplayDockingHistory()
+    {
+        Console.WriteLine("Dokkinghistorikk:");
+        foreach (var docking in Dockings)
         {
-            Dockings = new List<Docking>();
-            Loadings = new List<Loading>();
+            Console.WriteLine($"Dokket ved: {docking.dockSpace}, Tidspunkt: {docking.timestamp}");
         }
 
-        public void AddDocking(Docking docking)
+        Console.WriteLine("\nLastehistorikk:");
+        foreach (var loading in Loadings)
         {
-            Dockings.Add(docking);
+            Console.WriteLine($"Lastet ved: {loading.LoadingPlace}, Tidspunkt: {loading.Timestamp}");
         }
+    }
 
-        public void AddLoading(Loading loading)
-        {
-            Loadings.Add(loading);
-        }
+    /// <summary>
+    /// Registrerer en ankomst ved en spesifikk DockSpace og tidspunkt.
+    /// </summary>
+    /// <param name="dockSpace">DockSpace hvor ankomsten skjedde.</param>
+    /// <param name="arrivalTime">Tidspunktet for ankomsten.</param>
+    public void AddArrival(DockSpace dockSpace, DateTime arrivalTime)
+    {
+        Events.Add(new ShipEvent(arrivalTime, dockSpace, Enums.EventType.Arrival));
+    }
 
-        public void DisplayHistory()
-        {
-            Console.WriteLine("Docking History:");
-            foreach (var docking in Dockings)
-            {
-
-                Console.WriteLine($"Docked at: {docking.DockSpace}, Time: {docking.Timestamp}");
-
-            }
-
-            Console.WriteLine("\nLoading History:");
-            foreach (var loading in Loadings)
-            {
-                Console.WriteLine($"Loaded at: {loading.LoadingPlace}, Time: {loading.TimeSlot}");
-            }
-        }
-
+    /// <summary>
+    /// Registrerer en avgang fra en spesifikk DockSpace og tidspunkt.
+    /// </summary>
+    /// <param name="dockSpace">DockSpace hvor avgangen skjedde.</param>
+    /// <param name="departureTime">Tidspunktet for avgangen.</param>
+    public void AddDeparture(DockSpace dockSpace, DateTime departureTime)
+    {
+        Events.Add(new ShipEvent(departureTime, dockSpace, Enums.EventType.Departure));
     }
 }
-

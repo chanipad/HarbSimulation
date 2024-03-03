@@ -1,53 +1,106 @@
-﻿using ClassLibrary.HarborFramework.ShipInfo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using ClassLibrary.HarborFramework.Interfaces;
 namespace ClassLibrary.HarborFramework.Utilities
 {
-    public class SailingSchedule
+    /// <summary>
+    /// Administrerer både enkelte og gjentakende seilaser for skip.
+    /// </summary>
+    public class SailingSchedule : ISailing
     {
-        private List<SingleSailing> singleSailings = new List<SingleSailing>();
-        private RecurringSailing recurringSailing = new RecurringSailing();
+        private List<Ship> singleSailings = new List<Ship>();
+        private Dictionary<DayOfWeek, List<Ship>> recurringSailings = new Dictionary<DayOfWeek, List<Ship>>();
 
         /// <summary>
-        /// Retrieves a list of all ships from both single and recurring sailings.
+        /// Initialiserer en ny instans av <see cref="SailingSchedule"/>-klassen.
         /// </summary>
-        /// <returns>A list of <see cref="Ship"/> objects that are scheduled for either single or recurring sailings.</returns>
-        /// <remarks>
-        /// This method compiles ships from both single sailings and recurring weekly sailings into a single list.
-        /// Ships from recurring sailings are included without duplication, even if they are scheduled on multiple days.
-        /// </remarks>
-        
-        
-        /*
+        public SailingSchedule()
+        {
+            foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)))
+            {
+                recurringSailings[day] = new List<Ship>();
+            }
+        }
+
+        /// <summary>
+        /// Legger et skip til planen for en enkelt seilas.
+        /// </summary>
+        /// <param name="ship">Skipet som skal legges til.</param>
+        public void AddSingleSailing(Ship ship)
+        {
+            if (!singleSailings.Contains(ship))
+            {
+                singleSailings.Add(ship);
+            }
+        }
+
+        /// <summary>
+        /// Legger et skip til planen for gjentakende seilaser på en spesifikk ukedag.
+        /// </summary>
+        /// <param name="ship">Skipet som skal legges til.</param>
+        /// <param name="dayOfWeek">Ukedagen skipet skal seile.</param>
+        public void AddRecurringSailing(Ship ship, DayOfWeek dayOfWeek)
+        {
+            if (!recurringSailings[dayOfWeek].Contains(ship))
+            {
+                recurringSailings[dayOfWeek].Add(ship);
+            }
+        }
+
+        /// <summary>
+        /// Fjerner et skip fra både enkelt og gjentakende seilasplaner.
+        /// </summary>
+        /// <param name="ship">Skipet som skal fjernes.</param>
+        public void RemoveSailing(Ship ship)
+        {
+            // Fjerner fra enkelte seilaser
+            singleSailings.Remove(ship);
+
+            // Fjerner fra alle gjentakende seilaser
+            foreach (var daySailings in recurringSailings.Values)
+            {
+                daySailings.Remove(ship);
+            }
+        }
+
+        /// <summary>
+        /// Henter en liste over skip planlagt å seile på en spesifisert dato.
+        /// </summary>
+        /// <param name="date">Datoen for hvilken seilasplanen skal hentes.</param>
+        /// <returns>En liste over skip planlagt å seile på den spesifiserte datoen.</returns>
+        public List<Ship> GetSailingScheduleBasedOnDay(DateTime date)
+        {
+            var sailingsOnDate = new List<Ship>();
+
+            // Legger til enkelte seilaser planlagt for den spesifikke datoen
+            sailingsOnDate.AddRange(singleSailings.Where(ship => ship.dateTime.Date == date.Date));
+
+            // Legger til gjentakende seilaser for ukedagen
+            if (recurringSailings.ContainsKey(date.DayOfWeek))
+            {
+                sailingsOnDate.AddRange(recurringSailings[date.DayOfWeek]);
+            }
+
+            return sailingsOnDate;
+        }
+
+        /// <summary>
+        /// Henter en kombinert liste over alle enkelte og gjentakende seilaser.
+        /// </summary>
+        /// <returns>En liste over alle planlagte seilaser.</returns>
         public List<Ship> GetAllSailings()
         {
-            var allShips = new List<Ship>();
+            var allSailings = new List<Ship>();
 
-            // Add ships from single sailings
-            foreach (var singleSailing in singleSailings)
+            // Legger til alle enkelte seilaser
+            allSailings.AddRange(singleSailings);
+
+            // Legger til alle gjentakende seilaser
+            foreach (var daySailingPair in recurringSailings)
             {
-                allShips.AddRange(singleSailing.Ships);
+                allSailings.AddRange(daySailingPair.Value);
             }
 
-            // Add ships from recurring sailings
-            foreach (var daySailings in recurringSailing.WeeklySailings.Values)
-            {
-                foreach (var ship in daySailings)
-                {
-                    if (!allShips.Contains(ship))
-                    {
-                        allShips.Add(ship);
-                    }
-                }
-            }
-
-            return allShips;
-           }
-        */
+            return allSailings;
+        }
 
     }
 }

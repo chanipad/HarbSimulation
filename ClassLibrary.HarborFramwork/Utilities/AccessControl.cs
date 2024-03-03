@@ -1,22 +1,34 @@
 ﻿using ClassLibrary.HarborFramework.ShipInfo;
+using System.Collections.Generic;
 
 namespace ClassLibrary.HarborFramework.Utilities
 {
+    /// <summary>
+    /// Administrerer tilgangskontroll for skip, som tillater å gi og fjerne tilgang.
+    /// </summary>
     public class AccessControl
     {
-        private List<Ship> accessList { get; set; }
-    }
+        /// <summary>
+        /// Initialiserer en ny instans av <see cref="AccessControl"/> klassen.
+        /// </summary>
+        public AccessControl()
+        {
+            accessList = new List<Ship>();
+        }
 
-    /// <summary>
-    /// Grants access to a ship by adding it to the access list.
-    /// </summary>
-    /// <param name="ship">The ship to grant access to.</param>
-    /// <remarks>
-    /// If the ship is already in the access list, this method will not add it again,
-    /// preventing duplicates in the list.
-    /// </remarks>
+        /// <summary>
+        /// Får eller setter listen over skip som har blitt gitt tilgang.
+        /// </summary>
+        private List<Ship> accessList { get; set; } = new List<Ship>();
 
-    public void GrantAccess(Ship ship)
+        /// <summary>
+        /// Gir tilgang til det spesifiserte skipet, legger det til i tilgangslisten hvis det ikke allerede er til stede.
+        /// </summary>
+        /// <param name="ship">Skipet som skal gis tilgang.</param>
+        /// <remarks>
+        /// Hvis skipet allerede er i tilgangslisten, vil det ikke bli lagt til igjen.
+        /// </remarks>
+        public void GrantAccess(Ship ship)
         {
             if (!accessList.Contains(ship))
             {
@@ -24,30 +36,29 @@ namespace ClassLibrary.HarborFramework.Utilities
             }
         }
 
-    /// <summary>
-    /// Revokes access from a ship by removing it from the access list.
-    /// </summary>
-    /// <param name="ship">The ship to revoke access from.</param>
-    /// <remarks>
-    /// If the ship is not found in the access list, this method will do nothing.
-    /// </remarks>
-    public void RevokeAccess(Ship ship)
-    {
-        accessList.Remove(ship);
-    }
+        /// <summary>
+        /// Fjerner tilgang fra det spesifiserte skipet, fjerner det fra tilgangslisten.
+        /// </summary>
+        /// <param name="ship">Skipet som tilgangen skal fjernes fra.</param>
+        /// <remarks>
+        /// Hvis skipet ikke finnes i tilgangslisten, tas ingen handling.
+        /// </remarks>
+        public void RevokeAccess(Ship ship)
+        {
+            accessList.Remove(ship);
+        }
 
-  
-    /// <summary>
-    /// Checks if a ship has been granted access (i.e., is present in the access list).
-    /// </summary>
-    /// <param name="ship">The ship to check access for.</param>
-    /// <returns>true if the ship has access, otherwise false.</returns>
-    /// <remarks>
-    /// This method searches the access list for the specified ship and returns
-    /// true if found, indicating the ship has been granted access.
-    /// </remarks>
-    public bool HasAccess(Ship ship)
-    {
-        return accessList.Contains(ship);
+        /// <summary>
+        /// Sjekker om det spesifiserte skipet har blitt gitt tilgang.
+        /// </summary>
+        /// <param name="ship">Skipet som det skal sjekkes tilgang for.</param>
+        /// <returns><c>true</c> hvis skipet har tilgang; ellers, <c>false</c>.</returns>
+        /// <remarks>
+        /// Tilgang bestemmes av skipets tilstedeværelse i tilgangslisten.
+        /// </remarks>
+        public bool HasAccess(Ship ship)
+        {
+            return accessList.Contains(ship);
+        }
     }
 }

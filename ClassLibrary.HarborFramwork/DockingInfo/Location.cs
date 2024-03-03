@@ -1,41 +1,56 @@
-﻿using ClassLibrary.HarborFramework.Utilities;
-
-namespace ClassLibrary.HarborFramework.DockingInfo
+﻿namespace ClassLibrary.HarborFramework.DockingInfo
 {
+    /// <summary>
+    /// Representerer en lokasjon med tilknytning til en spesifikk dokkplass og et tidspunkt.
+    /// </summary>
     public class Location
     {
-        internal Location location;
+        /// <summary>
+        /// Identifikatoren for dokkplassen assosiert med denne lokasjonen.
+        /// </summary>
+        public string DockLocation { get; private set; }
 
-        //private TimeSlot Timestamp { get; set; }
-        private String DockLocation { get; set; }
-        public Location NewLocation { get; set; }
-        public DateTime Timestamp { get; set; }
+        /// <summary>
+        /// Tidspunktet for når lokasjonen er relevant, for eksempel for planlegging av laste- eller lossingsoperasjoner.
+        /// </summary>
+        public DateTime Timestamp { get; private set; }
 
-        /*public Location(int dockLocation, TimeSlot timeSlot)
+        /// <summary>
+        /// Dokkplassen assosiert med denne lokasjonen.
+        /// </summary>
+        public DockSpace DockSpace { get; private set; }
+
+        /// <summary>
+        /// Initialiserer en ny instans av Location-klassen med en dokkplass, tidspunkt, og dokkplassobjekt.
+        /// </summary>
+        /// <param name="dockLocation">Identifikatoren for dokkplassen.</param>
+        /// <param name="timestamp">Tidspunktet for lokasjonen.</param>
+        /// <param name="dockSpace">Dokkplassobjektet assosiert med lokasjonen.</param>
+        public Location(string dockLocation, DateTime timestamp, DockSpace dockSpace)
         {
             DockLocation = dockLocation;
-            TimeSlot = timeSlot;
+            Timestamp = timestamp;
+            DockSpace = dockSpace;
         }
-        */
-        public Location(string dockLocation, DateTime timeSlot)
+
+        /// <summary>
+        /// Initialiserer en ny instans av Location-klassen med en dokkplass og tidspunkt, uten et eksplisitt dokkplassobjekt.
+        /// Dette kan være nyttig for tilfeller hvor detaljert dokkplassinformasjon ikke er nødvendig eller tilgjengelig.
+        /// </summary>
+        /// <param name="dockLocation">Identifikatoren for dokkplassen.</param>
+        /// <param name="timestamp">Tidspunktet for lokasjonen.</param>
+        public Location(string dockLocation, DateTime timestamp)
         {
             DockLocation = dockLocation;
-            Timestamp = timeSlot;
+            Timestamp = timestamp;
+            DockSpace = null;
         }
 
-        public Location(string newLocation)
-        {
-            NewLocation = newLocation;
-
-        }
-
+        /// <summary>
+        /// Standardkonstruktør for Location-klassen.
+        /// </summary>
         public Location()
         {
-        }
-
-        public static implicit operator Location(string v)
-        {
-            throw new NotImplementedException();
         }
     }
 }

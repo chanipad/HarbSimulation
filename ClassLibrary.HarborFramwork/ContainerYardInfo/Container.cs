@@ -1,123 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ClassLibrary.HarborFramework.DockingInfo;
+using ClassLibrary.HarborFramework.Interfaces;
 
 namespace ClassLibrary.HarborFramework.ContainerYardInfo
 {
-
     /// <summary>
-    /// Represent container information.
+    /// Representerer informasjon om en container og dens historikk.
     /// </summary>
-    public class Container : IHarb
+    public class Container : IContainer
     {
-        
-        private int containerId { get; set; }
-        private List<Location> location { get; set; } = new List<Location>();
-
-
-        // constructor
-        public Container(int containId)
-        { 
-            containerId = containId;
-        }
-
-        public Container()
-        {
-            this.location = new List<Location>();
-        }
-
-
-        public void Print()
-        {
-            Console.WriteLine("Container Yard zone: ");
-        }
-
-
-
-    /// <summary>
-    /// Represent container yard zone 
-    /// </summary>
-    public class ContainerYards
-        {
-            internal object Location;
-
-            private string ContainerYardZone { get; set; }
-            private List<Container> ContainersList { get; set; } = new List<Container>();
-
-
-            // Constructor
-            public ContainerYards()
-            {
-                ContainersList = new List<Container>();
-            }
-
-
-            public void ConfigureContainer(Container container)
-            {
-                ContainersList.Add(container);
-            }
-        }
-
-
-
-
+        /// <summary>
+        /// Får containerens ID.
+        /// </summary>
+        public int ContainerId { get; private set; }
 
         /// <summary>
-        /// Represent container history location.
+        /// Holder en privat liste av lokasjoner for å spore containerens historikk.
         /// </summary>
-        public class ContainerHistory
+        private List<Location> Locations { get; set; } = new List<Location>();
+
+        /// <summary>
+        /// Konstruktør for å opprette en ny container med en spesifikk ID.
+        /// </summary>
+        /// <param name="containerId">Containerens unike ID.</param>
+        public Container(int containerId)
         {
-            public List<Location> location { get; set; }
-
-
-            /// <summary>
-            /// Add new location and time to cantainer history
-            /// </summary>
-            /// <param name="newLocation"></param>
-            public void AddNewLocation(Location newLocation)
-            {
-                Location loc = new()
-                {
-                    location = newLocation,
-                    Timestamp = DateTime.Now
-                };
-                location.Add(loc);
-            }
-
-
-            /// <summary>
-            /// Update location the last location history to container with new location
-            /// </summary>
-            /// <param name="newLocation"></param>
-            public void UpdateLocation(Location newLocation)
-            {
-                if (location.Count > 0)
-                {
-                    Location loc = new Location();
-                    loc.location = newLocation;
-                    loc.Timestamp = DateTime.Now;
-                    location[location.Count - 1] = loc;
-                }
-                else
-                {
-                    Console.WriteLine("History is empty. Please create new location");
-                }
-            }
-
-            /// <summary>
-            /// Return location from collection
-            /// </summary>
-            /// <param name="containerId">The ID of container you whan to get the location history</param>
-            /// <returns></returns>
-            public int getContainerHistory(int containerId)
-            {
-                return location.Count;
-            }
+            ContainerId = containerId;
         }
 
+        /// <summary>
+        /// Legger til en ny lokasjon i containerens historikk.
+        /// </summary>
+        /// <param name="newLocation">Den nye lokasjonen å legge til.</param>
+        public void AddNewLocation(Location newLocation)
+        {
+            Locations.Add(newLocation);
+        }
+
+        /// <summary>
+        /// Henter og skriver ut til konsollen en liste av alle lokasjonene containeren har vært på.
+        /// Denne metoden skriver ut hver lokasjonens detaljer til konsollen, inkludert dokkplassidentifikatoren og tidsstempelet, før den returnerer listen.
+        /// </summary>
+        /// <remarks>
+        /// Listen som returneres er en kopi av den interne listen for å forhindre eksterne modifikasjoner.
+        /// </remarks>
+        /// <returns>En liste av <see cref="Location"/> objekter som representerer containerens historikk.</returns>
+        public List<Location> GetContainerHistory()
+        {
+            List<Location> historyCopy = new List<Location>(Locations);
+
+            foreach (var location in historyCopy)
+            {
+                Console.WriteLine($"Location: {location.DockLocation}, Timestamp: {location.Timestamp}");
+            }
+
+            return historyCopy;
+        }
     }
 }
