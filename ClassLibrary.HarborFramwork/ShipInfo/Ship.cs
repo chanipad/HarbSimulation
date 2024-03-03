@@ -76,7 +76,7 @@ public class Ship
     /// Henter historikken til skipet som en streng.
     /// </summary>
     /// <returns>En streng som representerer historikken til skipet med alle registrerte ankomster og avganger.</returns>
-    public string GetHistory()
+    public void GetHistory()
     {
         var eventHistory = new System.Text.StringBuilder();
         eventHistory.AppendLine("Hendelseshistorikk:");
@@ -87,6 +87,6 @@ public class Ship
             eventHistory.AppendLine($"{eventType} ved DockSpace {shipEvent.DockSpace.DockSpaceNumber} - Tid: {shipEvent.EventTime}");
         }
 
-        return eventHistory.ToString();
+        Console.WriteLine(eventHistory);
     }
 }
