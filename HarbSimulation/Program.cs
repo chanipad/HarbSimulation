@@ -37,7 +37,7 @@ namespace HarbSimulation
             var ship = new Ship(1, ShipType.CARGO_SHIP);
 
             // Planlegg dokking
-            var docking = new Docking(dockSpace, new TimeSlot { startTime = DateTime.Now, endTime = DateTime.Now.AddHours(2) });
+            var docking = new Docking(dockSpace, new DateTime(2024, 02, 12));
             docking.ScheduleDocking(ship);
          
             //bruker test3
