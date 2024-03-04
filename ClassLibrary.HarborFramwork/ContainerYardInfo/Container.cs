@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using ClassLibrary.HarborFramework.DockingInfo;
 using ClassLibrary.HarborFramework.Interfaces;
+using ClassLibrary.HarborFramwork.Exceptions;
 
 namespace ClassLibrary.HarborFramework.ContainerYardInfo
 {
     /// <summary>
     /// Representerer informasjon om en container og dens historikk.
     /// </summary>
-    public class Container : IHarb // Antar at IHarb er et grensesnitt som eksisterer i prosjektet
+    public class Container : IContainer
     {
         /// <summary>
         /// Får containerens ID.
@@ -35,7 +36,14 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         /// <param name="newLocation">Den nye lokasjonen å legge til.</param>
         public void AddNewLocation(Location newLocation)
         {
-            Locations.Add(newLocation);
+            try
+            {
+                Locations.Add(newLocation);
+            }
+            catch (Exception ex)
+            {
+                throw new ContainerException("Fail to add new location.", ex);
+            }
         }
 
         /// <summary>
@@ -48,25 +56,27 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         /// <returns>En liste av <see cref="Location"/> objekter som representerer containerens historikk.</returns>
         public List<Location> GetContainerHistory()
         {
+            if (Locations == null)
+            {
+                throw new ContainerException("The locations list is not initialzed.");
+            }
+
             List<Location> historyCopy = new List<Location>(Locations);
 
-            foreach (var location in historyCopy)
+            try
             {
-                Console.WriteLine($"Location: {location.DockLocation}, Timestamp: {location.Timestamp}");
+                foreach (var location in historyCopy)
+                {
+                    Console.WriteLine($"Location: {location.DockLocation}, Timestamp: {location.Timestamp}");
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw new ContainerException("An error occurred while retrieving container history", ex);
             }
 
             return historyCopy;
         }
-
-
-        // Implementasjon av IHarb grensesnittmetoder (antar at disse er del av IHarb)
-        public void ConfigureHarbor() { throw new NotImplementedException(); }
-        public void ConfigureDockSpace() { throw new NotImplementedException(); }
-        public void ConfigureContainerYard() { throw new NotImplementedException(); }
-        public void SetSailingSchedule() { throw new NotImplementedException(); }
-        public void ConfigureShipType() { throw new NotImplementedException(); }
-        public ShipHistory GetShipHistory(int shipId) { throw new NotImplementedException(); }
-        public void EvaluateTrafficWeatherSeaConditions() { throw new NotImplementedException(); }
-        public void HandleSecurityRegulations() { throw new NotImplementedException(); }
     }
 }

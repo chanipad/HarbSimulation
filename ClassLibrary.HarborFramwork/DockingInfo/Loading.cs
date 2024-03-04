@@ -1,7 +1,4 @@
-﻿using System;
-using ClassLibrary.HarborFramework.ContainerYardInfo;
-using ClassLibrary.HarborFramework.Utilities;
-using static ClassLibrary.HarborFramework.ContainerYardInfo.Container;
+﻿using ClassLibrary.HarborFramework.ContainerYardInfo;
 
 namespace ClassLibrary.HarborFramework.DockingInfo
 {
@@ -23,14 +20,14 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         /// <summary>
         /// Får tidspunktet for når lasteoperasjonen er planlagt.
         /// </summary>
-        public TimeSlot Timestamp { get; private set; }
+        public DateTime Timestamp { get; private set; }
 
         /// <summary>
         /// Initialiserer en ny instans av Loading-klassen med en spesifisert containergård og tidspunkt for lasteoperasjonen.
         /// </summary>
         /// <param name="containerYards">Containergården hvor lastingen finner sted.</param>
         /// <param name="timeSlot">Tidspunktet for når lasteoperasjonen er planlagt.</param>
-        public Loading(ContainerYard containerYards, TimeSlot timeSlot)
+        public Loading(ContainerYard containerYards, DateTime timeSlot)
         {
             ContainerYards = containerYards;
             Timestamp = timeSlot;
@@ -41,8 +38,7 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         /// </summary>
         public void ScheduleLoading()
         {
-            // Merk: Eksemplet antar at ContainerYards.Location er en egenskap. Dette må justeres basert på faktisk implementasjon.
-            Console.WriteLine($"Loading scheduled at {ContainerYards.Location} on {Timestamp.startTime}");
+            Console.WriteLine($"Loading scheduled at {ContainerYards.Location} on {Timestamp}");
         }
     }
 

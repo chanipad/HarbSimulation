@@ -17,17 +17,17 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         /// <summary>
         /// Får eller setter tidspunktet for dokkingen.
         /// </summary>
-        public TimeSlot timestamp { get; set; }
+        public DateTime timestamp { get; set; }
 
         /// <summary>
-        /// Initialiserer en ny instans av Docking-klassen med en spesifisert DockSpace og TimeSlot.
+        /// Initialiserer en ny instans av Docking-klassen med en spesifisert DockSpace og dateTime.
         /// </summary>
         /// <param name="dockSpace">DockSpace hvor dokkingen skal skje.</param>
-        /// <param name="timeSlot">Tidspunktet for når dokkingen skal skje.</param>
-        public Docking(DockSpace dockSpace, TimeSlot timeSlot)
+        /// <param name="dateTime">Tidspunktet for når dokkingen skal skje.</param>
+        public Docking(DockSpace dockSpace, DateTime dateTime)
         {
             this.dockSpace = dockSpace;
-            timestamp = timeSlot;
+            timestamp = dateTime;
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace ClassLibrary.HarborFramework.DockingInfo
             }
             dockSpace.ScheduleShip(ship, timestamp);
 
-            Console.WriteLine($"Docking scheduled for {ship.Name} at dock space number {dockSpace.DockSpaceNumber} on {timestamp.startTime}");
+            Console.WriteLine($"Docking scheduled for {ship.Name} at dock space number {dockSpace.DockSpaceNumber} on {timestamp.ToString("yyyy-MM-dd HH:mm:ss")}");
         }
     }
 

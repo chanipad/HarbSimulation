@@ -1,4 +1,6 @@
-﻿namespace ClassLibrary.HarborFramework.ContainerYardInfo
+﻿using ClassLibrary.HarborFramwork.Exceptions;
+
+namespace ClassLibrary.HarborFramework.ContainerYardInfo
 {
     /// <summary>
     /// Representerer et containerområde med funksjonalitet for å administrere containere og planlegge lasteoperasjoner.
@@ -10,8 +12,17 @@
         /// </summary>
         public string Location { get; private set; }
 
+        /// <summary>
+        /// Setter start og slutt tid for en lasteopperasjon
+        /// </summary>
+        public class LasteOperasjon
+        {
+            public DateTime StartTime { get; set; }
+            public DateTime EndTime { get; set; }
+        }
+
         private List<Container> Containers { get; set; } = new List<Container>();
-        private List<TimeSlot> LasteOperasjoner { get; set; } = new List<TimeSlot>();
+        private List<LasteOperasjon> LasteOperasjoner { get; set; } = new List<LasteOperasjon>();
 
         /// <summary>
         /// Initialiserer en ny instans av <see cref="ContainerYard"/> klassen med en spesifikk lokasjon.
@@ -28,7 +39,14 @@
         /// <param name="container">Containeren som skal legges til.</param>
         public void AddContainer(Container container)
         {
-            Containers.Add(container);
+            try
+            {
+                Containers.Add(container);
+            }
+            catch (Exception ex)
+            {
+                throw new ContainerException("Fail to add new container to yard.", ex);
+            }
         }
 
         /// <summary>
@@ -55,18 +73,19 @@
         /// Sjekker for overlapp med eksisterende tidsintervaller for å unngå konflikter.
         /// </summary>
         /// <param name="containerId">IDen til containeren som lasteoperasjonen gjelder for.</param>
-        /// <param name="startTime">Starttidspunktet for lasteoperasjonen.</param>
-        /// <param name="endTime">Sluttidspunktet for lasteoperasjonen.</param>
+        /// <param name="startTime">Starttid for lasteoperasjonen.</param>
+        /// <param name="endTime">Sluttid for lasteoperasjonen.</param>
         public void ScheduleLoading(int containerId, DateTime startTime, DateTime endTime)
         {
             var container = GetContainer(containerId);
             if (container != null)
             {
-                var overlap = LasteOperasjoner.Exists(ts => ts.startTime < endTime && ts.endTime > startTime);
+                // Sjekker om det er noen overlapp med eksisterende tidsintervaller
+                var overlap = LasteOperasjoner.Any(op => op.StartTime < endTime && op.EndTime > startTime);
                 if (!overlap)
                 {
-                    LasteOperasjoner.Add(new TimeSlot { startTime = startTime, endTime = endTime });
-                    Console.WriteLine($"Loading for container {containerId} scheduled at {Location} from {startTime} to {endTime}.");
+                    LasteOperasjoner.Add(new LasteOperasjon { StartTime = startTime, EndTime = endTime });
+                    Console.WriteLine($"Loading for container {containerId} scheduled from {startTime} to {endTime}.");
                 }
                 else
                 {
