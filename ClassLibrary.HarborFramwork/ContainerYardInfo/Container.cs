@@ -44,7 +44,6 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
             {
                 throw new ContainerException("Fail to add new location.", ex);
             }
-            
         }
 
         /// <summary>
