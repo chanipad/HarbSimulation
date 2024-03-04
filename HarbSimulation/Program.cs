@@ -12,7 +12,7 @@ namespace HarbSimulation
     {
         static void Main(string[] args)
         {
-            /*
+            
             // bruker test1
             // Opprett container med en unik ID
             var container = new Container(1);
@@ -25,8 +25,7 @@ namespace HarbSimulation
             // Hent og skriv ut containerens historikk til konsollen
             Console.WriteLine("Henter containerhistorikk og skriver ut til konsollen:");
             container.GetContainerHistory();
-            */
-            /*
+           
             // bruker test2
             // Lag et dockspace
             var dockSpace = new DockSpace(1);
@@ -38,10 +37,9 @@ namespace HarbSimulation
             var ship = new Ship(1, ShipType.CARGO_SHIP);
 
             // Planlegg dokking
-            var docking = new Docking(dockSpace, new TimeSlot { startTime = DateTime.Now, endTime = DateTime.Now.AddHours(2) });
+            var docking = new Docking(dockSpace, new DateTime(2024, 02, 12));
             docking.ScheduleDocking(ship);
-            */
-            /*
+         
             //bruker test3
             // Liste med skip
             var ships = new List<Ship>
@@ -55,7 +53,7 @@ namespace HarbSimulation
             inspection.ScheduleRandomInspection(ships);
             // utfør en tilfeldig inspeksjon
             inspection.PerformInspection();
-            */
+            
 
             //bruker test4
             // Initialiserer skipet med unik ID og skiptype
