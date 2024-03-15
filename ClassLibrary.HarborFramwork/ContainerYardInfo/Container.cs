@@ -42,7 +42,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
             }
             catch (Exception ex)
             {
-                throw new ContainerException("Fail to add new location.", ex);
+                throw new ContainerNotFoundException("Fail to add new location.", ex);
             }
         }
 
@@ -58,7 +58,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         {
             if (Locations == null)
             {
-                throw new ContainerException("The locations list is not initialzed.");
+                throw new ContainerNotFoundException("The locations list is not initialzed.");
             }
 
             List<Location> historyCopy = new List<Location>(Locations);
@@ -73,7 +73,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
 
             catch (Exception ex)
             {
-                throw new ContainerException("An error occurred while retrieving container history", ex);
+                throw new ContainerNotFoundException("An error occurred while retrieving container history", ex);
             }
 
             return historyCopy;

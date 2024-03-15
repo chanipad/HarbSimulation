@@ -45,7 +45,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
             }
             catch (Exception ex)
             {
-                throw new ContainerException("Fail to add new container to yard.", ex);
+                throw new ContainerYardCapacityExceededException("Fail to add new container to yard.", ex);
             }
         }
 
