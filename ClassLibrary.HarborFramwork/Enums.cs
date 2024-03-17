@@ -64,5 +64,10 @@ namespace ClassLibrary.HarborFramework
             Thunderstorm,
             Snow
         }
+        public enum VehicleType
+        {
+            Truck,
+            AGV
+        }
     }
 }
