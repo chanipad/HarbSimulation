@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ClassLibrary.HarborFramework.Exceptions;
+using static ClassLibrary.HarborFramework.Enums;
 using System.Linq;
 using ClassLibrary.HarborFramework.ContainerYardInfo;
-using ClassLibrary.HarborFramework.ShipInfo;
-using ClassLibrary.HarborFramework.Utilities;
-using static ClassLibrary.HarborFramework.Enums;
-using ClassLibrary.HarborFramework.Exceptions;
-
 
 namespace ClassLibrary.HarborFramework.DockingInfo
 {
@@ -178,7 +173,7 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         /// </summary>
         /// <param name="time">Tidspunktet som skal sjekkes.</param>
         /// <returns>True hvis kranen er tilgjengelig, ellers false.</returns>
-        private bool IsCraneAvailable(DateTime time)
+        public bool IsCraneAvailable(DateTime time)
         {
             return !BusySchedule.Any(interval => interval.Start <= time && interval.End >= time);
         }
