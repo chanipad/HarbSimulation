@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassLibrary.HarborFramework.Exceptions
 {
-    internal class DockingExceptions
+    public class DockingExceptions
     {
         public class InvalidContainerIdException : Exception
         {
@@ -54,6 +50,24 @@ namespace ClassLibrary.HarborFramework.Exceptions
                 : base($"Docking error: {message}. Review docking parameters and conditions.") { }
             public DockingException(string message, Exception inner)
                 : base($"Docking error: {message}. Review docking parameters and conditions.", inner) { }
+        }
+
+        public class NoAvailableCranesException : Exception
+        {
+            public NoAvailableCranesException()
+                : base("Ingen tilgjengelige kraner for det planlagte tidspunktet.")
+            {
+            }
+
+            public NoAvailableCranesException(string message)
+                : base(message)
+            {
+            }
+
+            public NoAvailableCranesException(string message, Exception inner)
+                : base(message, inner)
+            {
+            }
         }
     }
 }
