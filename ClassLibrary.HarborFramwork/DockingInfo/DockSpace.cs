@@ -90,7 +90,7 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         /// <param name="vehicle">Transportmiddelet containeren skal lastes på.</param>
         /// <param name="scheduledTime">Tidspunktet for når lasteoperasjonen skal finne sted.</param>
         /// <returns>True hvis operasjonen var vellykket, ellers false.</returns>
-        public bool PerformLoadingOperation(Container container, ITransportVehicle vehicle, DateTime scheduledTime)
+        public bool PerformLoadingOperation(Container container, VehicleType vehicle, DateTime scheduledTime)
         {
             var availableCrane = Cranes.FirstOrDefault(crane => crane.IsCraneAvailable(scheduledTime));
             if (availableCrane != null)
@@ -182,7 +182,7 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         /// Markerer kranen som opptatt for et gitt tidsintervall.
         /// </summary>
         /// <param name="time">Starttidspunktet for den opptatte perioden.</param>
-        private void MarkCraneAsBusy(DateTime time)
+        public void MarkCraneAsBusy(DateTime time)
         {
             var busyPeriod = (Start: time, End: time.AddMinutes(30));
             BusySchedule.Add(busyPeriod);
