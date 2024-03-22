@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
+using ClassLibrary.HarborFramework.ContainerYardInfo;
 using ClassLibrary.HarborFramework.DockingInfo;
 using ClassLibrary.HarborFramework.ShipInfo;
 using static ClassLibrary.HarborFramework.Enums;
@@ -27,7 +29,7 @@ public class Ship
 
     private ShipHistory History { get; set; }
     private ShipCertificate Certificate { get; set; }
-
+    public List<Container> ListOfContainersOnShip { get; set; }
     /// <summary>
     /// Får eller setter datoen og tiden for skipet. Brukes for demonstrasjonsformål.
     /// </summary>
@@ -49,8 +51,27 @@ public class Ship
         ShipType = shipType;
         History = new ShipHistory();
         Certificate = new ShipCertificate();
-        dateTime = DateTime.Now; // Setter en standardverdi for demonstrasjon
+        dateTime = DateTime.Now;
+        ListOfContainersOnShip = new List<Container>();
     }
+    /// <summary>
+    /// Legger til en container til skipet.
+    /// </summary>
+    /// <param name="container">Containeren som skal legges til skipet.</param>
+    public void AddContainerToShip(Container container)
+    {
+        ListOfContainersOnShip.Add(container);
+    }
+
+    /// <summary>
+    /// Fjerner en container fra skipet.
+    /// </summary>
+    /// <param name="container">Containeren som skal fjernes fra skipet.</param>
+    public void RemoveContainerFromShip(Container container)
+    {
+        ListOfContainersOnShip.Remove(container);
+    }
+
 
     /// <summary>
     /// Registrerer en ankomst for skipet ved en spesifisert DockSpace og tidspunkt.
