@@ -14,7 +14,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         /// <summary>
         /// Får containerens ID.
         /// </summary>
-        public int ContainerId { get; private set; }
+        public int ContainerId { get; set; }
 
         /// <summary>
         /// Holder en privat liste av lokasjoner for å spore containerens historikk.
@@ -79,4 +79,5 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
             return historyCopy;
         }
     }
+
 }
