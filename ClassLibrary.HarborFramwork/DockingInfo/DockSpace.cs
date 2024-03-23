@@ -52,7 +52,7 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         {
             for (int i = 0; i < 7; i++)
             {
-                Cranes.Add(new Crane(i + 1));
+                Cranes.Add(item: new Crane(i + 1));
             }
         }
 

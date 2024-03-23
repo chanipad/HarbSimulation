@@ -1,4 +1,5 @@
-﻿using ClassLibrary.HarborFramwork.Exceptions;
+﻿using ClassLibrary.HarborFramework.DockingInfo;
+using ClassLibrary.HarborFramwork.Exceptions;
 
 namespace ClassLibrary.HarborFramework.ContainerYardInfo
 {
@@ -11,6 +12,8 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         /// Får lokasjonen til containerområdet.
         /// </summary>
         public string Location { get; private set; }
+
+        private List<StorageColumn> StorageColumns { get; set; } = new List<StorageColumn>();
 
         /// <summary>
         /// Setter start og slutt tid for en lasteopperasjon
@@ -28,24 +31,85 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         /// Initialiserer en ny instans av <see cref="ContainerYard"/> klassen med en spesifikk lokasjon.
         /// </summary>
         /// <param name="location">Lokasjonen til containerområdet.</param>
-        public ContainerYard(string location)
-        {
-            Location = location;
-        }
 
         /// <summary>
         /// Legger til en container i containerområdet.
         /// </summary>
         /// <param name="container">Containeren som skal legges til.</param>
-        public void AddContainer(Container container)
+        /// 
+        public ContainerYard(string location)
+        {
+            Location = location;
+            Containers = new List<Container>();
+            LasteOperasjoner = new List<LasteOperasjon>();
+            StorageColumns = new List<StorageColumn>();
+
+            InitializeStorageColumns();
+        }
+
+        /// <summary>
+        /// Lager kolonner for 18 og 15 lengder ISO-containere
+        /// </summary>
+        private void InitializeStorageColumns()
+        {
+            for (int i = 0; i < 24; i++)
+            {
+                StorageColumns.Add(new StorageColumn(18));
+            }
+            for (int i = 0; i < 7; i++)
+            {
+                StorageColumns.Add(new StorageColumn(15)); 
+            }
+        }
+        public class ContainerSlot
+        {
+            public Container StoredContainer { get; private set; }
+            public bool IsFullLength { get; set; } = true;
+
+            public ContainerSlot(bool isFullLength)
+            {
+                IsFullLength = isFullLength;
+            }
+
+            public bool AssignContainer(Container container)
+            {
+                if (StoredContainer == null)
+                {
+                    StoredContainer = container;
+                    return true;
+                }
+                return false;
+            }
+        }
+        public class StorageColumn
+        {
+            public int Length { get; private set; }
+            public List<ContainerSlot> Slots { get; private set; }
+
+            public StorageColumn(int length)
+            {
+                Length = length;
+                Slots = new List<ContainerSlot>();
+
+                // Anta at hver kolonne kan lagre 6 containere i bredden og 4 i høyden
+                int totalSlots = Length * 6 * 4;
+                for (int i = 0; i < totalSlots; i++)
+                {
+                    Slots.Add(new ContainerSlot(true)); // Standardinnstilling som full lengde
+                }
+            }
+        }
+
+        public void AddContainer(Location location, Container container)
         {
             try
             {
-                Containers.Add(container);
+                // Anta at dette er en metode i en klasse som har tilgang til alle locations
+                location.AddContainer(container); // Legger til container i den spesifikke lokasjonen og oppdaterer containerens lokasjon
             }
             catch (Exception ex)
             {
-                throw new ContainerYardCapacityExceededException("Fail to add new container to yard.", ex);
+                throw new ContainerYardCapacityExceededException("Failed to add new container to the location.", ex);
             }
         }
 
