@@ -17,6 +17,10 @@ public class Crane
     /// </summary>
     private List<(DateTime Start, DateTime End)> BusySchedule { get; set; } = new List<(DateTime, DateTime)>();
 
+    /// <summary>
+    /// Initialiserer en ny instans av <see cref="Crane"/> klassen.
+    /// </summary>
+    /// <param name="craneId">Unik identifikator for kranen.</param>
     public Crane(int craneId)
     {
         CraneId = craneId;
@@ -36,6 +40,7 @@ public class Crane
             vehicle.LoadContainer(container);
             Console.WriteLine($"Crane {CraneId} loaded container {container.ContainerId} onto {vehicle.Type}.");
             MarkCraneAsBusy(scheduledTime);
+            OnContainerMoved(new ContainerMovedEventArgs(container.ContainerId, vehicle.Type));
             return true;
         }
         else
@@ -44,6 +49,7 @@ public class Crane
             return false;
         }
     }
+
     /// <summary>
     /// Sjekker om kranen er tilgjengelig på et gitt tidspunkt.
     /// </summary>
@@ -62,5 +68,41 @@ public class Crane
     {
         var busyPeriod = (Start: time, End: time.AddMinutes(30));
         BusySchedule.Add(busyPeriod);
+    }
+
+    /// <summary>
+    /// Event som utløses når en container blir lastet på et kjøretøy.
+    /// </summary>
+    public event EventHandler<ContainerMovedEventArgs> ContainerMoved;
+    protected virtual void OnContainerMoved(ContainerMovedEventArgs e)
+    {
+        ContainerMoved?.Invoke(this, e);
+    }
+
+    /// <summary>
+    /// Inneholder data for <see cref="ContainerMoved"/> eventet.
+    /// </summary>
+    public class ContainerMovedEventArgs : EventArgs
+    {
+        /// <summary>
+        /// Containerens ID.
+        /// </summary>
+        public int ContainerId { get; private set; }
+
+        /// <summary>
+        /// Typen av kjøretøyet containeren ble lastet på.
+        /// </summary>
+        public Enums.Vehicle VehicleType { get; private set; }
+
+        /// <summary>
+        /// Initialiserer en ny instans av <see cref="ContainerMovedEventArgs"/> klassen.
+        /// </summary>
+        /// <param name="containerId">ID til containeren som ble flyttet.</param>
+        /// <param name="vehicleType">Typen av kjøretøyet containeren ble lastet på.</param>
+        public ContainerMovedEventArgs(int containerId, Enums.Vehicle vehicleType)
+        {
+            ContainerId = containerId;
+            VehicleType = vehicleType;
+        }
     }
 }
