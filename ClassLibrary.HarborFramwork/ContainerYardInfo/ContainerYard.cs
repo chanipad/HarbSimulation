@@ -1,5 +1,6 @@
 ﻿using ClassLibrary.HarborFramework.DockingInfo;
 using ClassLibrary.HarborFramwork.Exceptions;
+using static ClassLibrary.HarborFramework.Enums;
 
 namespace ClassLibrary.HarborFramework.ContainerYardInfo
 {
@@ -41,75 +42,127 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         {
             Location = location;
             Containers = new List<Container>();
-            LasteOperasjoner = new List<LasteOperasjon>();
             StorageColumns = new List<StorageColumn>();
-
-            InitializeStorageColumns();
         }
 
-        /// <summary>
-        /// Lager kolonner for 18 og 15 lengder ISO-containere
-        /// </summary>
-        private void InitializeStorageColumns()
-        {
-            for (int i = 0; i < 24; i++)
-            {
-                StorageColumns.Add(new StorageColumn(18));
-            }
-            for (int i = 0; i < 7; i++)
-            {
-                StorageColumns.Add(new StorageColumn(15)); 
-            }
-        }
         public class ContainerSlot
         {
             public Container StoredContainer { get; private set; }
-            public bool IsFullLength { get; set; } = true;
+            public DateTime TimeStored { get; private set; }
+            // Property to indicate the slot's designated container length type
+            public ContainerLength Length { get; set; }
 
-            public ContainerSlot(bool isFullLength)
+            // Constructor that initializes the slot with a specific container length type
+            public ContainerSlot(ContainerLength length)
             {
-                IsFullLength = isFullLength;
+                Length = length;
             }
 
+            // Attempts to assign a container to this slot, checking length compatibility and whether the slot is already occupied
             public bool AssignContainer(Container container)
             {
-                if (StoredContainer == null)
+                // Check if the slot is already occupied or if the container's length type doesn't match the slot's length type
+                if (StoredContainer != null || Length != container.Length)
                 {
-                    StoredContainer = container;
-                    return true;
+                    return false; // Slot is occupied or container type mismatch
                 }
-                return false;
+
+                StoredContainer = container;
+                TimeStored = DateTime.Now; // Track the time the container was stored
+                return true; // Container successfully assigned
+            }
+
+            // Checks if the slot is valid for a new container placement based on occupancy and the time constraint
+            public bool IsValidSlot()
+            {
+                // Slot is valid if it's empty
+                if (StoredContainer == null) return true;
+
+                // If a container is stored, check if it has exceeded the 4-day limit
+                var storageDuration = (DateTime.Now - TimeStored).TotalDays;
+                return storageDuration <= 4; // Slot is valid if the stored container hasn't exceeded the 4-day limit
+            }
+
+            // Provides information on the storage duration of the container in the slot
+            public string StorageDurationInfo()
+            {
+                if (StoredContainer == null) return "No container is stored in this slot.";
+
+                var daysStored = (DateTime.Now - TimeStored).TotalDays;
+                var daysLeft = 4 - daysStored;
+
+                if (daysStored <= 4)
+                {
+                    return $"Container has been stored for {daysStored:N2} days. {daysLeft:N2} days left before exceeding the 4-day limit.";
+                }
+                else
+                {
+                    return $"Container has exceeded the 4-day storage limit by {Math.Abs(daysLeft):N2} days.";
+                }
             }
         }
         public class StorageColumn
         {
-            public int Length { get; private set; }
-            public List<ContainerSlot> Slots { get; private set; }
+            public List<ContainerSlot> Slots { get; set; }
+            public int Height { get; } = 4;
+            public int Width { get; } = 6;
+            // Indicates whether the column is designated for full-length or half-length containers
+            public ContainerLength ColumnType { get; private set; }
 
-            public StorageColumn(int length)
+            public StorageColumn(ContainerLength columnType)
             {
-                Length = length;
+                ColumnType = columnType;
                 Slots = new List<ContainerSlot>();
-
-                // Anta at hver kolonne kan lagre 6 containere i bredden og 4 i høyden
-                int totalSlots = Length * 6 * 4;
-                for (int i = 0; i < totalSlots; i++)
+                // Initialize slots with the specified column type
+                for (int i = 0; i < Width * Height; i++)
                 {
-                    Slots.Add(new ContainerSlot(true)); // Standardinnstilling som full lengde
+                    Slots.Add(new ContainerSlot(columnType)); // Assuming ContainerSlot also uses ContainerLength
                 }
             }
-        }
 
-        public void AddContainer(Location location, Container container)
-        {
-            try
+            // Attempt to place a container in this column
+            public bool PlaceContainer(Container container)
             {
-                // Anta at dette er en metode i en klasse som har tilgang til alle locations
-                location.AddContainer(container); // Legger til container i den spesifikke lokasjonen og oppdaterer containerens lokasjon
+                // Check if the column type matches the container's type
+                if (ColumnType != container.Length && !(container.Length == ContainerLength.HalfLength && CanConvertToHalfLength()))
+                {
+                    return false; // Container type does not match column type and conversion is not possible or necessary
+                }
+
+                foreach (var slot in Slots)
+                {
+                    // Check if the slot matches the container type and is valid for placement
+                    if (slot.Length == container.Length && slot.IsValidSlot())
+                    {
+                        slot.AssignContainer(container);
+                        return true; // Container successfully placed
+                    }
+                }
+
+                // If no slot is available and the container is half-length, try converting the column to half-length
+                if (container.Length == ContainerLength.HalfLength && CanConvertToHalfLength())
+                {
+                    ConvertToHalfLength();
+                    return PlaceContainer(container); // Retry placing the container after conversion
+                }
+
+                return false; // No suitable slot found for the container
             }
-            catch (Exception ex)
+
+            // Check if the column can be converted to half-length (only applicable for full-length columns)
+            private bool CanConvertToHalfLength()
             {
-                throw new ContainerYardCapacityExceededException("Failed to add new container to the location.", ex);
+                return ColumnType == ContainerLength.FullLength && Slots.All(slot => slot.StoredContainer == null);
+            }
+
+            // Convert the column to accommodate half-length containers
+            private void ConvertToHalfLength()
+            {
+                ColumnType = ContainerLength.HalfLength;
+                foreach (var slot in Slots)
+                {
+                    slot.Length = ContainerLength.HalfLength; // Assuming ContainerSlot also has a Length property of type ContainerLength
+                }
             }
         }
 
@@ -130,36 +183,6 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         public List<Container> GetAllContainers()
         {
             return new List<Container>(Containers);
-        }
-
-        /// <summary>
-        /// Planlegger en lasteoperasjon for en spesifikk container og legger til den planlagte tiden i listen over tidsintervaller.
-        /// Sjekker for overlapp med eksisterende tidsintervaller for å unngå konflikter.
-        /// </summary>
-        /// <param name="containerId">IDen til containeren som lasteoperasjonen gjelder for.</param>
-        /// <param name="startTime">Starttid for lasteoperasjonen.</param>
-        /// <param name="endTime">Sluttid for lasteoperasjonen.</param>
-        public void ScheduleLoading(int containerId, DateTime startTime, DateTime endTime)
-        {
-            var container = GetContainer(containerId);
-            if (container != null)
-            {
-                // Sjekker om det er noen overlapp med eksisterende tidsintervaller
-                var overlap = LasteOperasjoner.Any(op => op.StartTime < endTime && op.EndTime > startTime);
-                if (!overlap)
-                {
-                    LasteOperasjoner.Add(new LasteOperasjon { StartTime = startTime, EndTime = endTime });
-                    Console.WriteLine($"Loading for container {containerId} scheduled from {startTime} to {endTime}.");
-                }
-                else
-                {
-                    Console.WriteLine("Cannot schedule loading: Time slot overlaps with an existing operation.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Container not found.");
-            }
         }
     }
 }

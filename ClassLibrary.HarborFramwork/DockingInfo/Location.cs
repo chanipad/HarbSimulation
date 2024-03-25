@@ -7,6 +7,7 @@ namespace ClassLibrary.HarborFramework.DockingInfo
     /// </summary>
     public class Location
     {
+        public DateTime Timestamp { get; set; }
         public List<Container> Containers { get; private set; } = new List<Container>();
 
         /// <summary>
@@ -24,10 +25,13 @@ namespace ClassLibrary.HarborFramework.DockingInfo
             DockLocation = dockLocation;
         }
 
+        /// <summary>
+        /// Legger til Container til Location.
+        /// </summary>
         public void AddContainer(Container container)
         {
             Containers.Add(container);
-            container. = this; // Oppdaterer containerens lokasjon
+            container.AddNewLocation(this);
         }
     }
 }
