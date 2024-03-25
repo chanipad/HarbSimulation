@@ -69,5 +69,11 @@ namespace ClassLibrary.HarborFramework
             Truck,
             AGV
         }
+        public enum ContainerLength
+        {
+            HalfLength,
+            FullLength
+        }
+
     }
 }
