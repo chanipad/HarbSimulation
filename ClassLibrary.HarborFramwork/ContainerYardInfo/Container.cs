@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ClassLibrary.HarborFramework.DockingInfo;
 using ClassLibrary.HarborFramework.Interfaces;
 using ClassLibrary.HarborFramwork.Exceptions;
+using static ClassLibrary.HarborFramework.Enums;
 
 namespace ClassLibrary.HarborFramework.ContainerYardInfo
 {
@@ -14,7 +15,8 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         /// <summary>
         /// Får containerens ID.
         /// </summary>
-        public int ContainerId { get; private set; }
+        public int ContainerId { get; set; }
+        public ContainerLength Length { get; set; }
 
         /// <summary>
         /// Holder en privat liste av lokasjoner for å spore containerens historikk.
@@ -25,9 +27,10 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
         /// Konstruktør for å opprette en ny container med en spesifikk ID.
         /// </summary>
         /// <param name="containerId">Containerens unike ID.</param>
-        public Container(int containerId)
+        public Container(int containerId, ContainerLength containerLength)
         {
             ContainerId = containerId;
+            Length = containerLength;
         }
 
         /// <summary>
@@ -75,7 +78,6 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
             {
                 throw new ContainerNotFoundException("An error occurred while retrieving container history", ex);
             }
-
             return historyCopy;
         }
     }

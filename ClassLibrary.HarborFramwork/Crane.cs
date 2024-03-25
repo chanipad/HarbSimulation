@@ -44,7 +44,6 @@ public class Crane
             return false;
         }
     }
-
     /// <summary>
     /// Sjekker om kranen er tilgjengelig på et gitt tidspunkt.
     /// </summary>
