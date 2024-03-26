@@ -102,29 +102,30 @@ namespace ClassLibrary.HarborFramework.DockingInfo
                 }
                 else
                 {
-                    return false; 
+                    return false;
                 }
             }
             else
             {
-                return false; 
+                return false;
+            }
+
         }
 
-    }
-
-    /// <summary>
-    /// Representerer et skip som er planlagt for dokking, med tilhørende tidspunkt for dokkingen.
-    /// </summary>
-    public class ScheduledShip
-    {
         /// <summary>
-        /// Skipet som er planlagt for dokking.
+        /// Representerer et skip som er planlagt for dokking, med tilhørende tidspunkt for dokkingen.
         /// </summary>
-        public Ship Ship { get; set; }
+        public class ScheduledShip
+        {
+            /// <summary>
+            /// Skipet som er planlagt for dokking.
+            /// </summary>
+            public Ship Ship { get; set; }
 
-        /// <summary>
-        /// Tidspunktet for når skipet er planlagt for dokking.
-        /// </summary>
-        public DateTime DockingDateTime { get; set; }
+            /// <summary>
+            /// Tidspunktet for når skipet er planlagt for dokking.
+            /// </summary>
+            public DateTime DockingDateTime { get; set; }
+        }
     }
 }

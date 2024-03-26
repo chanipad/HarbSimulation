@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using ClassLibrary.HarborFramework.DockingInfo;
 using ClassLibrary.HarborFramework.Interfaces;
-using ClassLibrary.HarborFramwork.Exceptions;
+using ClassLibrary.HarborFramework.Exceptions;
 using static ClassLibrary.HarborFramework.Enums;
 
 namespace ClassLibrary.HarborFramework.ContainerYardInfo
@@ -45,7 +45,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
             }
             catch (Exception ex)
             {
-                throw new ContainerNotFoundException("Fail to add new location.", ex);
+                throw new ContainerNotFoundException("Fail to add new location.",ex);
             }
         }
 
