@@ -1,5 +1,6 @@
 ﻿using ClassLibrary.HarborFramework.ContainerYardInfo;
 using ClassLibrary.HarborFramework;
+using ClassLibrary.HarborFramework.DockingInfo;
 public class Crane
 {
     /// <summary>
@@ -38,7 +39,8 @@ public class Crane
         if (IsCraneAvailable(scheduledTime))
         {
             vehicle.LoadContainer(container);
-            Console.WriteLine($"Crane {CraneId} loaded container {container.ContainerId} onto {vehicle.Type}.");
+            Location lokasjon = new Location($"{vehicle.Type}");
+            container.AddNewLocation(lokasjon);
             MarkCraneAsBusy(scheduledTime);
             OnContainerMoved(new ContainerMovedEventArgs(container.ContainerId, vehicle.Type));
             return true;
