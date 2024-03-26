@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using ClassLibrary.HarborFramework.DockingInfo;
+﻿using ClassLibrary.HarborFramework.DockingInfo;
 using ClassLibrary.HarborFramework.Interfaces;
-using ClassLibrary.HarborFramwork.Exceptions;
+using ClassLibrary.HarborFramework.Exceptions;
 using static ClassLibrary.HarborFramework.Enums;
 
 namespace ClassLibrary.HarborFramework.ContainerYardInfo
@@ -45,7 +43,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
             }
             catch (Exception ex)
             {
-                throw new ContainerNotFoundException("Fail to add new location.", ex);
+                throw new ContainerNotFoundException("Fail to add new location.",ex);
             }
         }
 
@@ -70,7 +68,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
             {
                 foreach (var location in historyCopy)
                 {
-                    Console.WriteLine($"Location: {location.DockLocation}, Timestamp: {location.Timestamp}");
+                    Console.WriteLine($"Location: {location.location}, Timestamp: {location.Timestamp}");
                 }
             }
 

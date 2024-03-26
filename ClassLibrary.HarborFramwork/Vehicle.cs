@@ -1,13 +1,13 @@
 ﻿using ClassLibrary.HarborFramework.ContainerYardInfo;
-using ClassLibrary.HarborFramwork.Exceptions;
+using ClassLibrary.HarborFramework.Exceptions;
 
 namespace ClassLibrary.HarborFramework
 {
     public class Vehicle
     {
         public Enums.Vehicle Type { get; set; }
-        private List<Container> Containers { get; set; } = new List<Container>();
-        private int Capacity { get; set; }
+        public List<Container> Containers { get; set; } = new List<Container>();
+        public int Capacity { get; set; }
 
         public Vehicle(Enums.Vehicle type, int ContainerCapacity)
         {
@@ -37,10 +37,15 @@ namespace ClassLibrary.HarborFramework
             }
         }
 
-        public Container DeliverContainer(string destination)
+        public Container UnloadContainer()
         {
-            Console.WriteLine($"{Type} is delivering the container to {destination}.");
-            return Containers[0];
+            if (Containers.Count > 0)
+            {
+                var container = Containers[0];
+                Containers.RemoveAt(0);
+                return container;
+            }
+            return null;
         }
     }
 }

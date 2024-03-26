@@ -13,25 +13,17 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         /// <summary>
         /// Identifikatoren for dokkplassen assosiert med denne lokasjonen.
         /// </summary>
-        public string DockLocation { get; private set; }
+        public string location { get; private set; }
 
 
         /// <summary>
         /// Initialiserer en ny instans av Location-klassen med en lokasjon for lagringsplasser for containere.
         /// </summary>
-        /// <param name="dockLocation">Identifikatoren for lokasjon for lagringsplasser for containere. </param>
-        public Location(string dockLocation)
+        /// <param name="TheLocation">Identifikatoren for lokasjon for containere. </param>
+        public Location(string TheLocation)
         {
-            DockLocation = dockLocation;
+            location = location;
         }
 
-        /// <summary>
-        /// Legger til Container til Location.
-        /// </summary>
-        public void AddContainer(Container container)
-        {
-            Containers.Add(container);
-            container.AddNewLocation(this);
-        }
     }
 }
