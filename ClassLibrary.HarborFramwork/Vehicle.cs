@@ -6,8 +6,8 @@ namespace ClassLibrary.HarborFramework
     public class Vehicle
     {
         public Enums.Vehicle Type { get; set; }
-        private List<Container> Containers { get; set; } = new List<Container>();
-        private int Capacity { get; set; }
+        public List<Container> Containers { get; set; } = new List<Container>();
+        public int Capacity { get; set; }
 
         public Vehicle(Enums.Vehicle type, int ContainerCapacity)
         {
