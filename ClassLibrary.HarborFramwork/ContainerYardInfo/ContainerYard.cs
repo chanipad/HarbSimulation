@@ -67,6 +67,9 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
                 if (AddContainerToYard(container))
                 {
                     Containers.Add(container);
+                    Location lokasjon = new Location("Container Yard");
+
+                    container.AddNewLocation(lokasjon);
                     crane.MarkCraneAsBusy(scheduledTime);
                     Console.WriteLine($"Successfully stored container {container.ContainerId} from vehicle into yard.");
                 }
@@ -116,6 +119,10 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
             Containers.Remove(container);
 
             crane.LoadContainerOnTransport(container, vehicle, scheduledTime);
+
+            Location lokasjon = new Location($"{vehicle.Type}");
+            container.AddNewLocation(lokasjon);
+
             Console.WriteLine($"Container {containerId} successfully loaded onto the vehicle using crane {crane.CraneId}.");
             return true;
         }
