@@ -10,6 +10,8 @@ namespace ClassLibrary.HarborFramework.Exceptions
     {
         public ContainerNotFoundException(string message)
             : base($"Container not found: {message}. Please verify the container ID.") { }
+        public ContainerNotFoundException(string message, Exception inner)
+    : base($"Container not found: {message}. Please verify the container ID.", inner) { }
     }
 
     public class LoadingScheduleConflictException : Exception

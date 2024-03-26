@@ -69,6 +69,8 @@ namespace HarbSimulation
 
             // Henter og viser hendelseshistorikken for skipet
            boat.GetHistory();
+
+
         }
     }
 }
