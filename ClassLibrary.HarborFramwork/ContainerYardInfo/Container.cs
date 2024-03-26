@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using ClassLibrary.HarborFramework.DockingInfo;
+﻿using ClassLibrary.HarborFramework.DockingInfo;
 using ClassLibrary.HarborFramework.Interfaces;
 using ClassLibrary.HarborFramework.Exceptions;
 using static ClassLibrary.HarborFramework.Enums;
@@ -70,7 +68,7 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
             {
                 foreach (var location in historyCopy)
                 {
-                    Console.WriteLine($"Location: {location.DockLocation}, Timestamp: {location.Timestamp}");
+                    Console.WriteLine($"Location: {location.location}, Timestamp: {location.Timestamp}");
                 }
             }
 
