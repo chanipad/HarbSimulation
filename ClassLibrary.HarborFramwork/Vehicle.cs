@@ -37,10 +37,15 @@ namespace ClassLibrary.HarborFramework
             }
         }
 
-        public Container DeliverContainer(string destination)
+        public Container UnloadContainer()
         {
-            Console.WriteLine($"{Type} is delivering the container to {destination}.");
-            return Containers[0];
+            if (Containers.Count > 0)
+            {
+                var container = Containers[0];
+                Containers.RemoveAt(0);
+                return container;
+            }
+            return null;
         }
     }
 }

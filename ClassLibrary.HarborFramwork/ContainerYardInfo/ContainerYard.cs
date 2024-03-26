@@ -16,33 +16,72 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
 
         private List<StorageColumn> StorageColumns { get; set; } = new List<StorageColumn>();
 
-        /// <summary>
-        /// Setter start og slutt tid for en lasteopperasjon
-        /// </summary>
-        public class LasteOperasjon
-        {
-            public DateTime StartTime { get; set; }
-            public DateTime EndTime { get; set; }
-        }
 
         private List<Container> Containers { get; set; } = new List<Container>();
-        private List<LasteOperasjon> LasteOperasjoner { get; set; } = new List<LasteOperasjon>();
 
         /// <summary>
-        /// Initialiserer en ny instans av <see cref="ContainerYard"/> klassen med en spesifikk lokasjon.
+        /// Initialiserer en ny instans av <see cref="ContainerYard"/>
         /// </summary>
-        /// <param name="location">Lokasjonen til containerområdet.</param>
 
-        /// <summary>
-        /// Legger til en container i containerområdet.
-        /// </summary>
-        /// <param name="container">Containeren som skal legges til.</param>
-        /// 
+
         public ContainerYard(string location)
         {
-            Location = location;
             Containers = new List<Container>();
             StorageColumns = new List<StorageColumn>();
+        }
+
+        public bool UnloadVehicleAndStoreContainer(Crane crane, Vehicle vehicle, DateTime scheduledTime)
+        {
+            if (!crane.IsCraneAvailable(scheduledTime))
+            {
+                Console.WriteLine($"Crane {crane.CraneId} is not available at the scheduled time.");
+                return false;
+            }
+
+            // Assuming the vehicle comes with containers pre-loaded
+            while (vehicle.Containers.Any())
+            {
+                var container = vehicle.UnloadContainer(); // Retrieve and remove the container from the vehicle
+                if (AddContainerToYard(container))
+                {
+                    crane.MarkCraneAsBusy(scheduledTime); // Mark crane as busy
+                    Console.WriteLine($"Successfully stored container {container.ContainerId} from vehicle into yard.");
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to store container {container.ContainerId} into yard.");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public bool AddContainerToYard(Container container)
+        {
+            foreach (var column in StorageColumns)
+            {
+                if (column.PlaceContainer(container))
+                {
+                    return true;
+                }
+            }
+
+            if (container.Length == ContainerLength.HalfLength)
+            {
+                foreach (var column in StorageColumns)
+                {
+                    if (column.CanConvertToHalfLength())
+                    {
+                        column.ConvertToHalfLength();
+                        if (column.PlaceContainer(container))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         }
 
         public class ContainerSlot
@@ -150,13 +189,13 @@ namespace ClassLibrary.HarborFramework.ContainerYardInfo
             }
 
             // Check if the column can be converted to half-length (only applicable for full-length columns)
-            private bool CanConvertToHalfLength()
+            public bool CanConvertToHalfLength()
             {
                 return ColumnType == ContainerLength.FullLength && Slots.All(slot => slot.StoredContainer == null);
             }
 
             // Convert the column to accommodate half-length containers
-            private void ConvertToHalfLength()
+            public void ConvertToHalfLength()
             {
                 ColumnType = ContainerLength.HalfLength;
                 foreach (var slot in Slots)
