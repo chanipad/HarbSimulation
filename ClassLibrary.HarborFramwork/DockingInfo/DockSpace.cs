@@ -1,5 +1,7 @@
 ﻿using ClassLibrary.HarborFramework.Exceptions;
 using static ClassLibrary.HarborFramework.Enums;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using ClassLibrary.HarborFramework.ContainerYardInfo;
 
@@ -52,7 +54,7 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         {
             for (int i = 0; i < 7; i++)
             {
-                Cranes.Add(item: new Crane(i + 1));
+                Cranes.Add(new Crane(i + 1));
             }
         }
 
@@ -84,46 +86,28 @@ namespace ClassLibrary.HarborFramework.DockingInfo
         }
 
         /// <summary>
-        /// Laster av den første containeren fra et skip og overfører den til et kjøretøy ved hjelp av en tilgjengelig kran,
-        /// basert på et planlagt tidspunkt. Metoden sjekker først om det er containere å laste av fra skipet,
-        /// finner deretter en tilgjengelig kran og laster containeren over til kjøretøyet. Containeren fjernes fra skipets liste etter vellykket lasting.
+        /// Håndterer ankomsten av et skip til dokkplassen, gitt at skipstypen er tillatt.
         /// </summary>
-        /// <param name="ship">Skipet som containeren skal lastes av fra. Må inneholde en liste over containere.</param>
-        /// <param name="vehicle">Kjøretøyet som containeren skal lastes over til.</param>
-        /// <param name="scheduledTime">Det planlagte tidspunktet for når containeren skal lastes over. Brukes til å finne en tilgjengelig kran.</param>
-        /// <returns>
-        /// Returnerer true hvis containeren ble vellykket lastet over til kjøretøyet og fjernet fra skipets liste.
-        /// Returnerer false hvis det ikke var mulig å laste containeren på grunn av at ingen kraner var tilgjengelige på det planlagte tidspunktet.
-        /// </returns>
-        /// <exception cref="Exception">Kastes hvis det ikke er noen containere på skipet som kan lastes av.</exception>
-        /// <exception cref="DockingExceptions.NoAvailableCranesException">Kastes hvis ingen kraner er tilgjengelige på det planlagte tidspunktet.</exception>
-        public bool UnloadContainerFromShip(Ship ship, Vehicle vehicle, DateTime scheduledTime)
+        /// <param name="ship">Skipet som ankommer.</param>
+        /// <param name="arrivalDateTime">Tidspunktet for når skipet ankommer.</param>
+        /// <returns>True hvis skipet er tillatt og ble planlagt for ankomst, ellers false.</returns>
+        public bool ArriveShip(Ship ship, DateTime arrivalDateTime)
         {
-            if (!ship.ListOfContainersOnShip.Any())
+            if (AllowedShipTypes.Contains(ship.ShipType))
             {
-                throw new Exception("Det er ingen containere å laste av skipet.");
-            }
-
-            var availableCrane = Cranes.FirstOrDefault(crane => crane.IsCraneAvailable(scheduledTime));
-            if (availableCrane != null)
-            {
-                var containerToUnload = ship.ListOfContainersOnShip.FirstOrDefault();
-                if (containerToUnload != null)
+                if (!ScheduledShips.Any(s => s.Ship == ship))
                 {
-                    bool loadSuccess = availableCrane.LoadContainerOnTransport(containerToUnload, vehicle, scheduledTime);
-                    if (loadSuccess)
-                    {
-                        ship.ListOfContainersOnShip.Remove(containerToUnload);
-                        return true;
-                    }
+                    ScheduledShips.Add(new ScheduledShip { Ship = ship, DockingDateTime = arrivalDateTime });
+                    return true;
+                }
+                else
+                {
+                    return false; 
                 }
             }
             else
             {
-                throw new DockingExceptions.NoAvailableCranesException("Ingen tilgjengelige kraner for det planlagte tidspunktet.");
-            }
-
-            return false;
+                return false; 
         }
 
     }
