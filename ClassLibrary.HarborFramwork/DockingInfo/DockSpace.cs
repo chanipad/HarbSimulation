@@ -109,7 +109,6 @@ namespace ClassLibrary.HarborFramework.DockingInfo
             {
                 return false;
             }
-
         }
 
         /// <summary>
