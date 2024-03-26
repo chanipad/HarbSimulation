@@ -53,6 +53,45 @@ public class Crane
     }
 
     /// <summary>
+    /// Overfører en container fra et kjøretøy til et skip ved et planlagt tidspunkt.
+    /// </summary>
+    /// <param name="vehicle">Kjøretøyet containeren skal fjernes fra.</param>
+    /// <param name="ship">Skipet containeren skal plasseres på.</param>
+    /// <param name="scheduledTime">Det planlagte tidspunktet for overføringen.</param>
+    /// <returns>True hvis overføringen ble utført, ellers false.</returns>
+    public bool TransferContainerFromVehicleToShip(Vehicle vehicle, Ship ship, DateTime scheduledTime)
+    {
+        if (IsCraneAvailable(scheduledTime))
+        {
+            var container = vehicle.UnloadContainer();
+            if (container != null)
+            {
+                ship.AddContainerToShip(container);
+
+                var newLocation = new Location($"Ship {ship.Id}"); 
+                newLocation.Timestamp = DateTime.Now; 
+                container.AddNewLocation(newLocation); 
+
+                MarkCraneAsBusy(scheduledTime);
+                OnContainerMoved(new ContainerMovedEventArgs(container.ContainerId, ship.ShipType));
+                Console.WriteLine($"Container {container.ContainerId} was successfully transferred from {vehicle.Type} to Ship {ship.Id}.");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("No container was available to transfer from the vehicle.");
+                return false;
+            }
+        }
+        else
+        {
+            Console.WriteLine($"Crane {CraneId} is not available at the scheduled time.");
+            return false;
+        }
+    }
+
+
+    /// <summary>
     /// Sjekker om kranen er tilgjengelig på et gitt tidspunkt.
     /// </summary>
     /// <param name="time">Tidspunktet som skal sjekkes.</param>
@@ -97,6 +136,11 @@ public class Crane
         public Enums.Vehicle VehicleType { get; private set; }
 
         /// <summary>
+        /// Får typen av skipet containeren ble lastet på, hvis aktuelt.
+        /// </summary>
+        public Enums.ShipType ShipType { get; private set; }
+
+        /// <summary>
         /// Initialiserer en ny instans av <see cref="ContainerMovedEventArgs"/> klassen.
         /// </summary>
         /// <param name="containerId">ID til containeren som ble flyttet.</param>
@@ -105,6 +149,17 @@ public class Crane
         {
             ContainerId = containerId;
             VehicleType = vehicleType;
+        }
+
+        /// <summary>
+        /// Initialiserer en ny instans av ContainerMovedEventArgs-klassen for et skip.
+        /// </summary>
+        /// <param name="containerId">ID til containeren som ble flyttet.</param>
+        /// <param name="shipType">Typen av skipet containeren ble lastet på.</param>
+        public ContainerMovedEventArgs(int containerId, Enums.ShipType shiptype)
+        {
+            ContainerId = containerId;
+            ShipType = shiptype;
         }
     }
 }
